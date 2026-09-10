@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}Connexion · La cuisine de Maha{% endblock %}
+{% block body %}
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Administration</span>
+      <h2>Connexion</h2>
+    </div>
+
+    {% if error %}
+      <p class="form-note">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+    {% endif %}
+
+    <form class="contact-form" method="post" style="max-width: 40ch;">
+      <div>
+        <label for="username">Identifiant</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" autocomplete="username" required autofocus>
+      </div>
+      <div>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="_password" autocomplete="current-password" required>
+      </div>
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+      <button class="btn btn-primary" type="submit">Se connecter</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
