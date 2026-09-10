@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contact;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -24,21 +26,30 @@ class ContactCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular('Demande de contact')
-            ->setEntityLabelInPlural('Demandes de contact');
+            ->setEntityLabelInSingular("Demande de contact")
+            ->setEntityLabelInPlural("Demandes de contact");
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        // les demandes arrivent uniquement via le formulaire public, pas de création manuelle en BO
+        return parent::configureActions($actions)->disable(Action::NEW);
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('senderName', 'Nom'),
-            EmailField::new('senderEmail', 'E-mail'),
-            TelephoneField::new('senderPhone', 'Téléphone'),
-            AssociationField::new('wishedFormula', 'Formule souhaitée')->setRequired(false),
-            IntegerField::new('senderWishedNumber', 'Nombre de convives'),
-            DateField::new('senderDate', 'Date envisagée'),
-            TextareaField::new('senderMessage', 'Message'),
+            IdField::new("id")->hideOnForm(),
+            TextField::new("senderName", "Nom"),
+            EmailField::new("senderEmail", "E-mail"),
+            TelephoneField::new("senderPhone", "Téléphone"),
+            AssociationField::new(
+                "wishedFormula",
+                "Formule souhaitée",
+            )->setRequired(false),
+            IntegerField::new("senderWishedNumber", "Nombre de convives"),
+            DateField::new("senderDate", "Date envisagée"),
+            TextareaField::new("senderMessage", "Message"),
         ];
     }
 }
