@@ -1,0 +1,39 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Galerie · La cuisine de Maha{% endblock %}
+{% block body %}
+<section>
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Galerie</span>
+      <h2>Plats, tables et moments partagés</h2>
+      <p>
+        Quelques assiettes, dressages et moments partagés lors de
+        précédentes prestations.
+      </p>
+    </div>
+    <div class="gallery-grid">
+      {% set photos = [
+        "gallery-01.jpg",
+        "gallery-02.jpg",
+        "gallery-03.jpg",
+        "gallery-04.jpg",
+        "gallery-05.jpg",
+        "gallery-06.jpg",
+        "gallery-07.jpg",
+        "gallery-08.jpg",
+        "gallery-09.jpg",
+        "gallery-10.jpg",
+        "gallery-11.jpg"
+      ] %}
+      {% for photo in photos %}
+      <figure>
+        <div class="plate-frame">
+          <img src="/images/galerie/{{ photo }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
+        </div>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

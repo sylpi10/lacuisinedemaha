@@ -1,0 +1,146 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Cheffe à domicile, brunchs & petits événements · La cuisine de Maha{% endblock %}
+{% block body %}
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Cheffe à domicile</span>
+      <h1>La cuisine de Maha</h1>
+      <p class="hero-tagline">
+        Des brunchs généreux, des repas faits maison et de petits événements
+        cuisinés avec soin, chez vous ou dans ma cuisine, à Pins-Justaret
+        et aux alentours.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/contact/">Réserver une date</a>
+        <a class="btn btn-ghost" href="/formules/">Voir les formules</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <span class="yolk-dot" aria-hidden="true"></span>
+      <img class="logo-in-dot" src="/images/brand/logo.png" alt="" aria-hidden="true">
+      <img class="olive-decor" src="/images/brand/olive-branch.png" alt="" aria-hidden="true">
+      <div class="plate-frame">
+        <img src="/images/home/profil.jpg" alt="Maha, cheffe à domicile, dans sa cuisine" width="494" height="741">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bio">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Présentation</span>
+      <h2 class="script-heading">Bio</h2>
+      <span class="section-divider" aria-hidden="true">&#9825;</span>
+    </div>
+    <div class="bio-text">
+      <p>
+        Après une reconversion professionnelle et l'obtention de mon CAP
+        Cuisine, j'ai décidé de faire de ma passion mon métier.
+      </p>
+      <p>
+        À travers La Cuisine de Maha, je propose une cuisine 100% maison,
+        soignée et pleine de saveurs, réalisée avec de bons produits et
+        adaptée aux envies et besoins de chacun.
+      </p>
+      <p>
+        J'aime cuisiner avec le cœur, créer des plats simples mais gourmands,
+        équilibrer les saveurs et surtout partager le plaisir d'un bon repas
+        fait maison.
+      </p>
+      <p>
+        Repas privés, préparation des repas de la semaine (batch cooking),
+        brunchs ou petits événements : chaque prestation est réalisée avec
+        sérieux, passion et dans le respect des règles d'hygiène alimentaire.
+      </p>
+      <img class="olive-decor" src="/images/brand/olive-branch.png" alt="" aria-hidden="true">
+    </div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Le concept</span>
+      <h2>Trois façons de recevoir sans rien préparer</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h3>Brunch</h3>
+        <p>
+          Un brunch complet, sucré et salé, dressé sur votre table pour un
+          dimanche entre proches, sans un plat à sortir du four vous-même.
+        </p>
+      </div>
+      <div class="concept-card">
+        <h3>Repas à domicile</h3>
+        <p>
+          Un déjeuner ou un dîner cuisiné sur place, du marché à la
+          vaisselle, pour profiter du repas plutôt que de sa préparation.
+        </p>
+      </div>
+      <div class="concept-card">
+        <h3>Petits événements</h3>
+        <p>
+          Anniversaires, fêtes de famille ou entre amis : un menu pensé pour
+          le nombre de convives et l'occasion, dans un format resserré.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie-apercu">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">En images</span>
+      <h2>Quelques instants passés en cuisine</h2>
+    </div>
+    <div class="gallery-grid">
+      {% set apercu = ["gallery-04.jpg", "gallery-06.jpg", "gallery-08.jpg", "gallery-02.jpg"] %}
+      {% for photo in apercu %}
+      <figure>
+        <div class="plate-frame">
+          <img src="/images/galerie/{{ photo }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
+        </div>
+      </figure>
+      {% endfor %}
+    </div>
+    <p style="text-align:center; margin-top: 36px;">
+      <a class="btn btn-ghost" href="/galerie/">Voir toute la galerie</a>
+    </p>
+  </div>
+</section>
+
+<section id="avis">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Avis</span>
+      <h2>Ce qu'en disent les convives</h2>
+    </div>
+    <div class="avis-grid">
+      <div class="avis-card">
+        <p>« Témoignage à ajouter ici, une fois recueilli auprès d'un premier client. »</p>
+        <p class="avis-signature">— Prénom, ville</p>
+      </div>
+      <div class="avis-card">
+        <p>« Deuxième témoignage à ajouter, dans le même esprit que le premier. »</p>
+        <p class="avis-signature">— Prénom, ville</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta-final">
+  <div class="wrap" style="text-align:center;">
+    <h2>Une date, une envie, un nombre de convives ?</h2>
+    <p style="max-width: 50ch; margin: 0 auto 28px;">
+      Écrivez-moi avec ces quelques informations et je reviens vers vous
+      rapidement pour construire le menu ensemble.
+    </p>
+    <a class="btn btn-primary" href="/contact/">Me contacter</a>
+  </div>
+</section>
+{% endblock %}

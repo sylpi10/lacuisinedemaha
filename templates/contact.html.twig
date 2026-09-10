@@ -1,0 +1,82 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Contact · La cuisine de Maha{% endblock %}
+{% block body %}
+<section>
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <span class="eyebrow">Contact</span>
+      <h2>Parlons de votre prochain repas</h2>
+      <p>
+        Pour toute demande, précisez si possible la date envisagée, le
+        lieu, la formule souhaitée et le nombre de convives : cela permet
+        une première réponse plus rapide.
+      </p>
+      <dl>
+        <dt>E-mail</dt>
+        <dd><a href="mailto:contact@lacuisinedemaha.fr">contact@lacuisinedemaha.fr</a></dd>
+        <dt>Téléphone</dt>
+        <dd><!-- Numéro à compléter --></dd>
+        <dt>Zone d'intervention</dt>
+        <dd>Pins-Justaret et environs</dd>
+      </dl>
+    </div>
+
+    <form class="contact-form" action="#" method="POST">
+      <!--
+        Étape à faire : créer un compte gratuit sur formspree.io,
+        créer un formulaire et remplacer VOTRE_ID_FORMSPREE par
+        l'identifiant fourni. Alternative si le site est hébergé sur
+        Netlify : ajouter l'attribut data-netlify="true" sur ce <form>
+        et supprimer l'attribut action.
+      -->
+      <div class="form-row">
+        <div>
+          <label for="nom">Nom et prénom</label>
+          <input type="text" id="nom" name="nom" required>
+        </div>
+        <div>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="telephone">Téléphone</label>
+          <input type="tel" id="telephone" name="telephone">
+        </div>
+        <div>
+          <label for="formule">Formule souhaitée</label>
+          <select id="formule" name="formule">
+            <option value="brunch">Brunch</option>
+            <option value="repas">Repas maison</option>
+            <option value="evenement">Petit événement</option>
+            <option value="ne-sais-pas">Je ne sais pas encore</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="date">Date envisagée</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div>
+          <label for="convives">Nombre de convives</label>
+          <input type="number" id="convives" name="convives" min="1">
+        </div>
+      </div>
+      <div>
+        <label for="message">Votre message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <p class="form-note">
+        <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400;">
+          <input type="checkbox" required style="width:auto;">
+          J'accepte que ces informations soient utilisées pour traiter ma demande.
+        </label>
+      </p>
+      <button class="btn btn-primary" type="submit">Envoyer la demande</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

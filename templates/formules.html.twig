@@ -1,0 +1,70 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Formules & tarifs · La cuisine de Maha{% endblock %}
+{% block body %}
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Formules & tarifs</span>
+      <h2>Choisissez votre formule, on ajuste ensemble le détail</h2>
+      <p>
+        Les prix ci-dessous donnent un repère de départ ; ils sont
+        ajustés selon le nombre de convives, la saison et les produits
+        choisis. À personnaliser avec vos propres tarifs.
+      </p>
+    </div>
+
+    <div class="formules-grid">
+      <div class="formule-card">
+        <span class="formule-name">Brunch</span>
+        <span class="formule-price">À partir de [tarif] € / pers.</span>
+        <ul>
+          <li>Sucré et salé, dressé sur place</li>
+          <li>Jus, thé ou café inclus</li>
+          <li>Idéal de 6 à 20 convives</li>
+        </ul>
+      </div>
+
+      <div class="formule-card is-featured">
+        <span class="formule-name">Repas maison</span>
+        <span class="formule-price">À partir de [tarif] € / pers.</span>
+        <ul>
+          <li>Entrée, plat, dessert</li>
+          <li>Produits choisis selon la saison</li>
+          <li>Service et rangement inclus</li>
+        </ul>
+      </div>
+
+      <div class="formule-card">
+        <span class="formule-name">Petit événement</span>
+        <span class="formule-price">Sur devis</span>
+        <ul>
+          <li>Anniversaires, fêtes de famille</li>
+          <li>Menu construit avec vous</li>
+          <li>De 8 à 30 convives</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Infos essentielles</span>
+      <h2>Questions fréquentes</h2>
+    </div>
+    <div style="max-width: 68ch;">
+      <h3>Comment se déroule une prestation ?</h3>
+      <p>
+        À compléter : réflexion du menu, courses, préparation sur place
+        ou en amont, service, rangement de la cuisine.
+      </p>
+      <h3>Combien de temps à l'avance réserver ?</h3>
+      <p>À compléter selon vos délais habituels.</p>
+      <h3>Peut-on adapter le menu à des allergies ou régimes particuliers ?</h3>
+      <p>À compléter avec votre politique sur les régimes spécifiques.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

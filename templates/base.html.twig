@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}La cuisine de Maha{% endblock %}</title>
+        <link rel="icon" href="{{ asset('images/brand/logo.png') }}" type="image/png">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+
+        {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
+        {% if frankenphp_hot_reload %}
+        <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
+        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+        {% endif %}
+    </head>
+    <body>
+        <header class="site-header"><div class="wrap">
+          <a class="brand" href="{{ path('site_home') }}"><img class="brand-logo" src="{{ asset('images/brand/logo.png') }}" alt="" width="40" height="40">La cuisine de <span>Maha</span></a>
+          <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
+          <nav><ul class="main-nav"><li><a href="{{ path('site_home') }}">Accueil</a></li><li><a href="{{ path('site_formules') }}">Formules &amp; tarifs</a></li><li><a href="{{ path('site_galerie') }}">Galerie</a></li><li><a href="{{ path('site_contact') }}">Contact</a></li></ul></nav>
+        </div></header>
+        <main>{% block body %}{% endblock %}</main>
+        <footer class="site-footer"><div class="wrap"><div class="footer-grid"><div><div class="brand" style="color: var(--ivory);">La cuisine de Maha</div><p style="max-width: 32ch; opacity: .85; margin-top: 10px;">Brunchs, repas maison et petits événements, préparés dans ma cuisine ou dans la vôtre.</p></div><div><dl class="contact-info"><dt>Contact</dt><dd><a href="mailto:contact@lacuisinedemaha.fr">contact@lacuisinedemaha.fr</a></dd></dl></div></div><div class="footer-bottom"><span>&copy; 2026 La cuisine de Maha — Tous droits réservés</span><span>Site conçu et entretenu à la main</span></div></div></footer>
+        <script src="{{ asset('js/nav.js') }}"></script>
+    </body>
+</html>
