@@ -17,15 +17,25 @@ class Galery
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $title = null;
+    private ?string $homepageName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $homepageTitle = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $galleryName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $galleryTitle = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     /**
-     * @var Collection<int, Image>
+     * @var Collection<int, GaleryImage>
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'gallery')]
+    #[ORM\OneToMany(targetEntity: GaleryImage::class, mappedBy: 'galery', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $images;
 
     public function __construct()
@@ -38,14 +48,50 @@ class Galery
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getHomepageName(): ?string
     {
-        return $this->title;
+        return $this->homepageName;
     }
 
-    public function setTitle(?string $title): static
+    public function setHomepageName(?string $homepageName): static
     {
-        $this->title = $title;
+        $this->homepageName = $homepageName;
+
+        return $this;
+    }
+
+    public function getHomepageTitle(): ?string
+    {
+        return $this->homepageTitle;
+    }
+
+    public function setHomepageTitle(?string $homepageTitle): static
+    {
+        $this->homepageTitle = $homepageTitle;
+
+        return $this;
+    }
+
+    public function getGalleryName(): ?string
+    {
+        return $this->galleryName;
+    }
+
+    public function setGalleryName(?string $galleryName): static
+    {
+        $this->galleryName = $galleryName;
+
+        return $this;
+    }
+
+    public function getGalleryTitle(): ?string
+    {
+        return $this->galleryTitle;
+    }
+
+    public function setGalleryTitle(?string $galleryTitle): static
+    {
+        $this->galleryTitle = $galleryTitle;
 
         return $this;
     }
@@ -63,29 +109,28 @@ class Galery
     }
 
     /**
-     * @return Collection<int, Image>
+     * @return Collection<int, GaleryImage>
      */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    public function addImage(Image $image): static
+    public function addImage(GaleryImage $image): static
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
-            $image->setGallery($this);
+            $image->setGalery($this);
         }
 
         return $this;
     }
 
-    public function removeImage(Image $image): static
+    public function removeImage(GaleryImage $image): static
     {
         if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getGallery() === $this) {
-                $image->setGallery(null);
+            if ($image->getGalery() === $this) {
+                $image->setGalery(null);
             }
         }
 

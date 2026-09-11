@@ -42,11 +42,6 @@ class DashboardController extends AbstractDashboardController
             "fa fa-images",
         );
         yield MenuItem::linkTo(
-            ImageCrudController::class,
-            "Photos",
-            "fa fa-image",
-        );
-        yield MenuItem::linkTo(
             ContactCrudController::class,
             "Demandes de contact",
             "fa fa-envelope",

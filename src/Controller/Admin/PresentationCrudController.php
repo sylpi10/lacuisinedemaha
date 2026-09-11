@@ -7,8 +7,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -33,7 +33,11 @@ class PresentationCrudController extends AbstractCrudController
             TextField::new("title")->setRequired(false),
             TextField::new("subtitle")->setRequired(false),
             TextareaField::new("description"),
-            AssociationField::new("image")->setRequired(false),
+            ImageField::new('image')
+                ->setBasePath('/uploads/presentation')
+                ->setUploadDir('public/uploads/presentation')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
         ];
     }
 }

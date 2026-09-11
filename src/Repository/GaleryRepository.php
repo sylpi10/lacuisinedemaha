@@ -16,6 +16,11 @@ class GaleryRepository extends ServiceEntityRepository
         parent::__construct($registry, Galery::class);
     }
 
+    public function getContent(): ?Galery
+    {
+        return $this->findOneBy([]);
+    }
+
     //    /**
     //     * @return Galery[] Returns an array of Galery objects
     //     */

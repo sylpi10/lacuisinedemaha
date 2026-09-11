@@ -26,8 +26,8 @@ class Formulas
     #[ORM\Column(type: Types::TEXT)]
     private ?string $itemList = null;
 
-    #[ORM\ManyToOne]
-    private ?Image $image = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function getId(): ?int
     {
@@ -82,12 +82,12 @@ class Formulas
         return $this;
     }
 
-    public function getImage(): ?Image
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(?Image $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 
