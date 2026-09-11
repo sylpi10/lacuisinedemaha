@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -15,24 +16,28 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Merci de renseigner votre nom.')]
     private ?string $senderName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Merci de renseigner votre e-mail.')]
+    #[Assert\Email(message: 'Cet e-mail ne semble pas valide.')]
     private ?string $senderEmail = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $senderPhone = null;
 
     #[ORM\ManyToOne]
     private ?Formulas $wishedFormula = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $senderWishedNumber = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $senderDate = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Merci de préciser votre demande.')]
     private ?string $senderMessage = null;
 
     public function getId(): ?int
@@ -69,7 +74,7 @@ class Contact
         return $this->senderPhone;
     }
 
-    public function setSenderPhone(string $senderPhone): static
+    public function setSenderPhone(?string $senderPhone): static
     {
         $this->senderPhone = $senderPhone;
 
@@ -93,7 +98,7 @@ class Contact
         return $this->senderWishedNumber;
     }
 
-    public function setSenderWishedNumber(int $senderWishedNumber): static
+    public function setSenderWishedNumber(?int $senderWishedNumber): static
     {
         $this->senderWishedNumber = $senderWishedNumber;
 
@@ -105,7 +110,7 @@ class Contact
         return $this->senderDate;
     }
 
-    public function setSenderDate(\DateTime $senderDate): static
+    public function setSenderDate(?\DateTime $senderDate): static
     {
         $this->senderDate = $senderDate;
 

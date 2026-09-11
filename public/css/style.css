@@ -604,6 +604,19 @@ form.contact-form {
     grid-template-columns: 1fr 1fr;
     gap: 18px;
 }
+.contact-grid {
+    position: relative;
+    p.form-note {
+        position: absolute;
+        color: #232b23;
+        top: auto;
+        bottom: -12px;
+        background-color: lighten(#232b23, 0.6);
+        border: solid 1px #232b23;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+}
 
 @media (max-width: 560px) {
     .form-row {
