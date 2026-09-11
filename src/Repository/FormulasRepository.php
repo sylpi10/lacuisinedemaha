@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Formulas;
+use App\Entity\Galery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,6 +15,11 @@ class FormulasRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Formulas::class);
+    }
+
+    public function getContent(): ?Galery
+    {
+        return $this->findOneBy([]);
     }
 
     //    /**

@@ -65,15 +65,15 @@
 <section id="galerie-apercu">
   <div class="wrap">
     <div class="section-head center">
-      <span class="eyebrow">En images</span>
-      <h2>Quelques instants passés en cuisine</h2>
+      <span class="eyebrow">{{ gallery.homePageName }}</span>
+      <h2>{{ gallery.homePageTitle }}</h2>
     </div>
     <div class="gallery-grid">
-      {% set apercu = ["gallery-04.jpg", "gallery-06.jpg", "gallery-08.jpg", "gallery-02.jpg"] %}
-      {% for photo in apercu %}
+      {% set limit = 4 %}
+      {% for photo in gallery.images|slice(0, limit) %}
       <figure>
         <div class="plate-frame">
-          <img src="/images/galerie/{{ photo }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
+          <img src="/uploads/galerie/{{ photo.image }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
         </div>
       </figure>
       {% endfor %}

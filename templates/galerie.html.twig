@@ -5,31 +5,17 @@
 <section>
   <div class="wrap">
     <div class="section-head center">
-      <span class="eyebrow">Galerie</span>
-      <h2>Plats, tables et moments partagés</h2>
+      <span class="eyebrow">{{ gallery.galleryName }}</span>
+      <h2>{{ gallery.galleryTitle }}</h2>
       <p>
-        Quelques assiettes, dressages et moments partagés lors de
-        précédentes prestations.
+        {{ gallery.description }}
       </p>
     </div>
     <div class="gallery-grid">
-      {% set photos = [
-        "gallery-01.jpg",
-        "gallery-02.jpg",
-        "gallery-03.jpg",
-        "gallery-04.jpg",
-        "gallery-05.jpg",
-        "gallery-06.jpg",
-        "gallery-07.jpg",
-        "gallery-08.jpg",
-        "gallery-09.jpg",
-        "gallery-10.jpg",
-        "gallery-11.jpg"
-      ] %}
-      {% for photo in photos %}
+      {% for photo in gallery.images %}
       <figure>
         <div class="plate-frame">
-          <img src="/images/galerie/{{ photo }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
+          <img src="/uploads/galerie/{{ photo.image }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
         </div>
       </figure>
       {% endfor %}
