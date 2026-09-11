@@ -16,6 +16,11 @@ class PresentationRepository extends ServiceEntityRepository
         parent::__construct($registry, Presentation::class);
     }
 
+    public function getContent(): ?Presentation
+    {
+        return $this->findOneBy([]);
+    }
+
     //    /**
     //     * @return Presentation[] Returns an array of Presentation objects
     //     */

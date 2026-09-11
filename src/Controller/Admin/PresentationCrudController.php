@@ -22,24 +22,18 @@ class PresentationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular('Présentation')
-            ->setEntityLabelInPlural('Présentation');
-    }
-
-    public function configureActions(Actions $actions): Actions
-    {
-        return parent::configureActions($actions)
-            ->update(Crud::PAGE_INDEX, Action::NEW, fn (Action $action) => $action->setLabel('Ajouter une présentation'));
+            ->setEntityLabelInSingular("Présentation")
+            ->setEntityLabelInPlural("Présentation");
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('title')->setRequired(false),
-            TextField::new('subtitle')->setRequired(false),
-            TextareaField::new('description'),
-            AssociationField::new('image')->setRequired(false),
+            IdField::new("id")->hideOnForm(),
+            TextField::new("title")->setRequired(false),
+            TextField::new("subtitle")->setRequired(false),
+            TextareaField::new("description"),
+            AssociationField::new("image")->setRequired(false),
         ];
     }
 }
