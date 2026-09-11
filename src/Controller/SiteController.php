@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\FormulasRepository;
 use App\Repository\GaleryRepository;
 use App\Repository\PresentationRepository;
+use App\Repository\ReviewsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,11 +18,13 @@ final class SiteController extends AbstractController
     public function home(
         PresentationRepository $presentationRepository,
         FormulasRepository $formulasRepository,
+        ReviewsRepository $reviewsRepository,
     ): Response {
         return $this->render("home.html.twig", [
             "presentation" => $presentationRepository->getContent(),
             "formulas" => $formulasRepository->findAll(),
             "gallery" => $this->galeryRepository->getContent(),
+            "reviews" => $reviewsRepository->findAll(),
         ]);
     }
 

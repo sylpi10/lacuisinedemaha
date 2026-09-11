@@ -47,6 +47,11 @@ class DashboardController extends AbstractDashboardController
             "fa fa-envelope",
         );
         yield MenuItem::linkTo(
+            ReviewsCrudController::class,
+            "Avis des utilisateurs",
+            "fa fa-pen",
+        );
+        yield MenuItem::linkTo(
             UserCrudController::class,
             "Utilisateurs",
             "fa fa-user-shield",

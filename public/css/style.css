@@ -532,7 +532,12 @@ section + section {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
 }
-
+#avis .wrap p.empty-reviews {
+    text-align: center;
+    margin: auto;
+    font-style: italic;
+    color: var(--pine-deep);
+}
 @media (max-width: 720px) {
     .avis-grid {
         grid-template-columns: 1fr;

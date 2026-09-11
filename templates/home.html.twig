@@ -90,15 +90,18 @@
       <span class="eyebrow">Avis</span>
       <h2>Ce qu'en disent les convives</h2>
     </div>
-    <div class="avis-grid">
-      <div class="avis-card">
-        <p>« Témoignage à ajouter ici, une fois recueilli auprès d'un premier client. »</p>
-        <p class="avis-signature">— Prénom, ville</p>
-      </div>
-      <div class="avis-card">
-        <p>« Deuxième témoignage à ajouter, dans le même esprit que le premier. »</p>
-        <p class="avis-signature">— Prénom, ville</p>
-      </div>
+    {% if reviews|length > 0 %}
+        <div class="avis-grid">
+            {% for review in reviews %}
+                <div class="avis-card">
+                    <p>{{ review.content }}</p>
+                    <p class="avis-signature">— {{ review.author }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p class="empty-reviews">Aucun avis pour l'instant.</p>
+        {% endif %}
     </div>
   </div>
 </section>
