@@ -15,35 +15,22 @@
     </div>
 
     <div class="formules-grid">
-      <div class="formule-card">
-        <span class="formule-name">Brunch</span>
-        <span class="formule-price">À partir de [tarif] € / pers.</span>
-        <ul>
-          <li>Sucré et salé, dressé sur place</li>
-          <li>Jus, thé ou café inclus</li>
-          <li>Idéal de 6 à 20 convives</li>
-        </ul>
-      </div>
 
-      <div class="formule-card is-featured">
-        <span class="formule-name">Repas maison</span>
-        <span class="formule-price">À partir de [tarif] € / pers.</span>
-        <ul>
-          <li>Entrée, plat, dessert</li>
-          <li>Produits choisis selon la saison</li>
-          <li>Service et rangement inclus</li>
-        </ul>
-      </div>
+        {% for key, formula in formulas %}
+        <div class="formule-card{% if key == 1 %} is-featured{% endif %}">
+          <span class="formule-name">{{ formula.title }}</span>
+          <span class="formule-price">{{ formula.price }} € / pers.</span>
+          <ul>
+            {% for item in formula.itemList|split("\n") %}
+              {% set item = item|trim %}
+              {% if item %}
+                <li>{{ item }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
 
-      <div class="formule-card">
-        <span class="formule-name">Petit événement</span>
-        <span class="formule-price">Sur devis</span>
-        <ul>
-          <li>Anniversaires, fêtes de famille</li>
-          <li>Menu construit avec vous</li>
-          <li>De 8 à 30 convives</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>

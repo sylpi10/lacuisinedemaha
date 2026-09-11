@@ -21,11 +21,11 @@ final class SiteController extends AbstractController
         ]);
     }
 
-    #[Route("/formules", name: "site_formules")]
-    public function formules(): Response
-    {
-        return $this->render("formules.html.twig");
-    }
+    // #[Route("/formules", name: "site_formules")]
+    // public function formules(): Response
+    // {
+    //     return $this->render("formules.html.twig");
+    // }
 
     #[Route("/galerie", name: "site_galerie")]
     public function galerie(): Response
