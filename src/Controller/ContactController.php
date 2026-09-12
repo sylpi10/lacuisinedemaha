@@ -16,6 +16,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ContactController extends AbstractController
 {
+    private const SESSION_TOKEN_KEY = "contact_form_token";
+    private const SESSION_ISSUED_AT_KEY = "contact_form_issued_at";
+
+    // en dessous, un envoi est trop rapide pour être humain ; au-dessus, le
+    // formulaire est resté ouvert trop longtemps et on préfère le regénérer
+    private const MIN_FILL_SECONDS = 4;
+    private const MAX_FORM_AGE_SECONDS = 86400;
+
     #[Route("/contact", name: "site_contact")]
     public function contact(
         Request $request,
@@ -28,6 +36,13 @@ final class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->passesAntiSpamGuards($request)) {
+                // on ne donne aucune indication à un robot : il voit le même
+                // écran de succès qu'un envoi légitime, sans que rien ne soit
+                // enregistré ni envoyé.
+                return $this->redirectToRoute("site_contact");
+            }
+
             $entityManager->persist($contact);
             $entityManager->flush();
 
@@ -56,9 +71,65 @@ final class ContactController extends AbstractController
             return $this->redirectToRoute("site_contact");
         }
 
+        [$contactToken, $contactIssuedAt] = $this->issueAntiSpamGuards($request);
+
         return $this->render("contact.html.twig", [
             "contactForm" => $form,
+            "contact_token" => $contactToken,
+            "contact_issued_at" => $contactIssuedAt,
         ]);
+    }
+
+    /**
+     * Émet un nouveau couple jeton/horodatage pour le formulaire qui va être
+     * affiché, et le garde en session pour pouvoir le vérifier à la soumission.
+     *
+     * @return array{0: string, 1: int}
+     */
+    private function issueAntiSpamGuards(Request $request): array
+    {
+        $token = bin2hex(random_bytes(16));
+        $issuedAt = time();
+
+        $session = $request->getSession();
+        $session->set(self::SESSION_TOKEN_KEY, $token);
+        $session->set(self::SESSION_ISSUED_AT_KEY, $issuedAt);
+
+        return [$token, $issuedAt];
+    }
+
+    /**
+     * Trois vérifications indépendantes, chacune suffisante pour rejeter :
+     *  - un champ piège invisible pour un humain, mais que les robots
+     *    remplissent souvent en soumettant tous les champs du formulaire ;
+     *  - un jeton propre à cette session, pour rejeter les soumissions
+     *    directes qui n'ont jamais chargé le formulaire ;
+     *  - un délai minimum/maximum, comparé à l'horodatage stocké en session
+     *    (jamais à une valeur envoyée par le client, qui serait falsifiable).
+     */
+    private function passesAntiSpamGuards(Request $request): bool
+    {
+        $honeypot = trim((string) $request->request->get("website", ""));
+        if ("" !== $honeypot) {
+            return false;
+        }
+
+        $session = $request->getSession();
+
+        $submittedToken = (string) $request->request->get("contact_token", "");
+        $sessionToken = (string) $session->get(self::SESSION_TOKEN_KEY, "");
+        if ("" === $sessionToken || !hash_equals($sessionToken, $submittedToken)) {
+            return false;
+        }
+
+        $issuedAt = (int) $session->get(self::SESSION_ISSUED_AT_KEY, 0);
+        if ($issuedAt <= 0) {
+            return false;
+        }
+
+        $elapsed = time() - $issuedAt;
+
+        return $elapsed >= self::MIN_FILL_SECONDS && $elapsed <= self::MAX_FORM_AGE_SECONDS;
     }
 
     private function buildEmailBody(Contact $contact): string

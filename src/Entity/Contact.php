@@ -16,12 +16,14 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Merci de renseigner votre nom.')]
+    #[Assert\NotBlank(message: "Merci de renseigner votre nom.")]
+    #[Assert\Length(min: 2, max: 70)]
     private ?string $senderName = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Merci de renseigner votre e-mail.')]
-    #[Assert\Email(message: 'Cet e-mail ne semble pas valide.')]
+    #[Assert\NotBlank(message: "Merci de renseigner votre e-mail.")]
+    #[Assert\Email(message: "Cet e-mail ne semble pas valide.")]
+    #[Assert\Length(max: 70)]
     private ?string $senderEmail = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -37,7 +39,7 @@ class Contact
     private ?\DateTime $senderDate = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: 'Merci de préciser votre demande.')]
+    #[Assert\NotBlank(message: "Merci de préciser votre demande.")]
     private ?string $senderMessage = null;
 
     public function getId(): ?int

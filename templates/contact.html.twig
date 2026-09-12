@@ -27,6 +27,9 @@
     {% endfor %}
 
     {{ form_start(contactForm, {'attr': {'class': 'contact-form'}}) }}
+      {# Piège à robots : invisible et inutilisable au clavier pour un humain. #}
+      <input type="text" name="website" id="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+      <input type="hidden" name="contact_token" value="{{ contact_token }}">
       <div class="form-row">
         <div>{{ form_row(contactForm.senderName) }}</div>
         <div>{{ form_row(contactForm.senderEmail) }}</div>
