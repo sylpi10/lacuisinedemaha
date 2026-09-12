@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Presentation;
+use App\Service\ImageWebpConverter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -11,9 +12,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\Image;
 
 class PresentationCrudController extends AbstractCrudController
 {
+    public function __construct(
+        private readonly ImageWebpConverter $webpConverter,
+    ) {}
+
     public static function getEntityFqcn(): string
     {
         return Presentation::class;
@@ -36,7 +42,10 @@ class PresentationCrudController extends AbstractCrudController
             ImageField::new('image')
                 ->setBasePath('/uploads/presentation')
                 ->setUploadDir('public/uploads/presentation')
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern('[randomhash].webp')
+                ->setFormTypeOption('upload_new', $this->webpConverter->uploadCallback(800))
+                ->setFileConstraints(new Image(mimeTypes: ImageWebpConverter::SUPPORTED_MIME_TYPES))
+                ->mimeTypes(implode(',', ImageWebpConverter::SUPPORTED_MIME_TYPES))
                 ->setRequired(false),
         ];
     }

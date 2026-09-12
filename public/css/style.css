@@ -606,12 +606,12 @@ form.contact-form {
 }
 .contact-grid {
     position: relative;
-    p.form-note {
+    & > p.form-note {
         position: absolute;
         color: #232b23;
         top: auto;
         bottom: -12px;
-        background-color: lighten(#232b23, 0.6);
+        background-color: #a7aaa7;
         border: solid 1px #232b23;
         padding: 8px 12px;
         border-radius: 8px;

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}La cuisine de Maha{% endblock %}</title>
-        <link rel="icon" href="{{ asset('images/brand/logo.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('images/brand/favicon.png') }}" type="image/png">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% block stylesheets %}
         {% endblock %}
@@ -21,7 +21,7 @@
     </head>
     <body>
         <header class="site-header"><div class="wrap">
-          <a class="brand" href="{{ path('site_home') }}"><img class="brand-logo" src="{{ asset('images/brand/logo.png') }}" alt="" width="40" height="40">La cuisine de <span>Maha</span></a>
+          <a class="brand" href="{{ path('site_home') }}"><img class="brand-logo" src="{{ asset('images/brand/logo.webp') }}" alt="" width="42" height="40">La cuisine de <span>Maha</span></a>
           <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
           <nav><ul class="main-nav"><li><a href="{{ path('site_home') }}">Accueil</a></li><li><a href="{{ path('site_formules') }}">Formules &amp; tarifs</a></li><li><a href="{{ path('site_galerie') }}">Galerie</a></li><li><a href="{{ path('site_contact') }}">Contact</a></li></ul></nav>
         </div></header>

@@ -19,10 +19,10 @@
     </div>
     <div class="hero-visual">
       <span class="yolk-dot" aria-hidden="true"></span>
-      <img class="logo-in-dot" src="/images/brand/logo.png" alt="" aria-hidden="true">
-      <img class="olive-decor" src="/images/brand/olive-branch.png" alt="" aria-hidden="true">
+      <img class="logo-in-dot" src="/images/brand/logo.webp" alt="Logo de La cuisine de Maha" aria-hidden="true" width="72" height="69">
+      <img class="olive-decor" src="/images/brand/olive-branch.webp" alt="Fraise de la cuisine de Maha" aria-hidden="true" width="130" height="42">
       <div class="plate-frame">
-        <img src="/images/home/profil.jpg" alt="Maha, cheffe à domicile, dans sa cuisine" width="494" height="741">
+        <img src="/images/home/profil.webp" alt="Maha, cheffe à domicile, dans sa cuisine" width="442" height="442">
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
     </div>
     <div class="bio-text">
       {{ presentation.description | nl2br }}
-      <img class="olive-decor" src="/images/brand/olive-branch.png" alt="" aria-hidden="true">
+      <img class="olive-decor" src="/images/brand/olive-branch.webp" alt="" aria-hidden="true" width="140" height="46">
     </div>
   </div>
 </section>
@@ -73,7 +73,7 @@
       {% for photo in gallery.images|slice(0, limit) %}
       <figure>
         <div class="plate-frame">
-          <img src="/uploads/galerie/{{ photo.image }}" alt="Photo de La cuisine de Maha" loading="lazy" width="960" height="1200">
+          <img src="/uploads/galerie/{{ photo.image }}" alt="Photo de La cuisine de Maha" loading="lazy" width="245" height="245">
         </div>
       </figure>
       {% endfor %}
