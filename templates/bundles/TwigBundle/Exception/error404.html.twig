@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Page introuvable · La cuisine de Maha{% endblock %}
+{% block description %}Cette page n'existe pas ou n'existe plus. Retrouvez les formules, la galerie ou contactez Maha, cheffe à domicile.{% endblock %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
+{% block body %}
+<section>
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Erreur 404</span>
+      <h1>Cette page est introuvable</h1>
+      <p>
+        Le lien est peut-être incorrect ou la page a été déplacée.
+        Retrouvez l'essentiel ci-dessous.
+      </p>
+      <div class="hero-cta" style="justify-content: center;">
+        <a class="btn btn-primary" href="{{ path('site_home') }}">Retour à l'accueil</a>
+        <a class="btn btn-ghost" href="{{ path('site_formules') }}">Voir les formules</a>
+        <a class="btn btn-ghost" href="{{ path('site_contact') }}">Me contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
