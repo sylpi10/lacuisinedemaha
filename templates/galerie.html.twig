@@ -13,10 +13,10 @@
       </p>
     </div>
     <div class="gallery-grid">
-      {% for photo in gallery.images %}
+      {% for key, photo in gallery.images %}
       <figure>
         <div class="plate-frame">
-          <img src="/uploads/galerie/{{ photo.image }}" alt="Photo de La cuisine de Maha" loading="lazy" width="233" height="233">
+          <img src="/uploads/galerie/{{ photo.image }}" alt="Photo {{ key }} de La cuisine de Maha" loading="lazy" width="233" height="233">
         </div>
       </figure>
       {% endfor %}

@@ -7,6 +7,9 @@
         <title>{% block title %}La cuisine de Maha{% endblock %}</title>
         <meta name="description" content="{% block description %}Maha, cheffe à domicile à Pins-Justaret (31) : brunchs, repas maison et petits événements, cuisinés chez vous ou dans ma cuisine.{% endblock %}">
         {% block robots %}{% endblock %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        {% block preload %}{% endblock %}
         <link rel="canonical" href="{{ site_url ~ app.request.pathInfo }}">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="La cuisine de Maha">
@@ -15,6 +18,14 @@
         <meta property="og:title" content="{{ block('title') }}">
         <meta property="og:description" content="{{ block('description') }}">
         <meta property="og:image" content="{{ site_url ~ asset('images/home/profil.webp') }}">
+        <meta property="og:image:alt" content="Maha, cheffe à domicile, dans sa cuisine">
+        <meta property="og:image:width" content="494">
+        <meta property="og:image:height" content="494">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ block('title') }}">
+        <meta name="twitter:description" content="{{ block('description') }}">
+        <meta name="twitter:image" content="{{ site_url ~ asset('images/home/profil.webp') }}">
+        <meta name="twitter:image:alt" content="Maha, cheffe à domicile, dans sa cuisine">
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -35,6 +46,7 @@
         }
         </script>
         <link rel="icon" href="{{ asset('images/brand/favicon.png') }}" type="image/png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=Alex+Brush&display=swap">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% block stylesheets %}
         {% endblock %}

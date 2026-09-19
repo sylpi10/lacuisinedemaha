@@ -2,6 +2,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Cheffe à domicile, brunchs & petits événements · La cuisine de Maha{% endblock %}
 {% block description %}Maha, cheffe à domicile à Pins-Justaret (31) : brunchs généreux, repas faits maison et petits événements, chez vous ou dans ma cuisine.{% endblock %}
+{% block preload %}<link rel="preload" as="image" href="{{ asset('images/home/profil.webp') }}" type="image/webp" fetchpriority="high">{% endblock %}
 {% block body %}
 <section class="hero">
   <div class="wrap">
@@ -23,7 +24,7 @@
       <img class="logo-in-dot" src="/images/brand/logo.webp" alt="Logo de La cuisine de Maha" aria-hidden="true" width="72" height="69">
       <img class="olive-decor" src="/images/brand/olive-branch.webp" alt="Fraise de la cuisine de Maha" aria-hidden="true" width="130" height="42">
       <div class="plate-frame">
-        <img src="/images/home/profil.webp" alt="Maha, cheffe à domicile, dans sa cuisine" width="442" height="442">
+        <img src="/images/home/profil.webp" alt="Maha, cheffe à domicile, dans sa cuisine" width="442" height="442" fetchpriority="high">
       </div>
     </div>
   </div>
