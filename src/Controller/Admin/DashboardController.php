@@ -37,6 +37,11 @@ class DashboardController extends AbstractDashboardController
             "fa fa-align-left",
         );
         yield MenuItem::linkTo(
+            HomeConceptCrudController::class,
+            "Concept (accueil)",
+            "fa fa-heading",
+        );
+        yield MenuItem::linkTo(
             FormulasCrudController::class,
             "Formules",
             "fa fa-utensils",

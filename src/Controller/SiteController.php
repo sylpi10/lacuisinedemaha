@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\FormulasRepository;
+use App\Repository\HomeConceptRepository;
 use App\Repository\HomeHeroRepository;
 use App\Repository\GaleryRepository;
 use App\Repository\PresentationRepository;
@@ -18,12 +19,14 @@ final class SiteController extends AbstractController
     #[Route("/", name: "site_home")]
     public function home(
         HomeHeroRepository $homeHeroRepository,
+        HomeConceptRepository $homeConceptRepository,
         PresentationRepository $presentationRepository,
         FormulasRepository $formulasRepository,
         ReviewsRepository $reviewsRepository,
     ): Response {
         return $this->render("home.html.twig", [
             "hero" => $homeHeroRepository->getContent(),
+            "concept" => $homeConceptRepository->getContent(),
             "presentation" => $presentationRepository->getContent(),
             "formulas" => $formulasRepository->findAll(),
             "gallery" => $this->galeryRepository->getContent(),
