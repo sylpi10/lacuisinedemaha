@@ -6,20 +6,22 @@
 <section>
   <div class="wrap contact-grid">
     <div class="contact-info">
-      <span class="eyebrow">Contact</span>
-      <h1>Parlons de votre prochain repas</h1>
-      <p>
-        Pour toute demande, précisez si possible la date envisagée, le
-        lieu, la formule souhaitée et le nombre de convives : cela permet
-        une première réponse plus rapide.
-      </p>
+      <span class="eyebrow">{{ page.subtitle }}</span>
+      <h1>{{ page.title }}</h1>
+      <p>{{ page.description }}</p>
       <dl>
+        {% if page.email %}
         <dt>E-mail</dt>
-        <dd><a href="mailto:contact@lacuisinedemaha31.fr">contact@lacuisinedemaha31.fr</a></dd>
+        <dd><a href="mailto:{{ page.email }}">{{ page.email }}</a></dd>
+        {% endif %}
+        {% if page.phone %}
         <dt>Téléphone</dt>
-        <dd><!-- Numéro à compléter --></dd>
+        <dd><a href="tel:{{ page.phone|replace({' ': '', '.': ''}) }}">{{ page.phone }}</a></dd>
+        {% endif %}
+        {% if page.serviceArea %}
         <dt>Zone d'intervention</dt>
-        <dd>Pins-Justaret et environs</dd>
+        <dd>{{ page.serviceArea }}</dd>
+        {% endif %}
       </dl>
     </div>
 

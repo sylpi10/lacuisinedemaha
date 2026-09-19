@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\ContactPageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +31,7 @@ final class ContactController extends AbstractController
         EntityManagerInterface $entityManager,
         MailerInterface $mailer,
         LoggerInterface $logger,
+        ContactPageRepository $contactPageRepository,
     ): Response {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -74,6 +76,7 @@ final class ContactController extends AbstractController
         [$contactToken, $contactIssuedAt] = $this->issueAntiSpamGuards($request);
 
         return $this->render("contact.html.twig", [
+            "page" => $contactPageRepository->getContent(),
             "contactForm" => $form,
             "contact_token" => $contactToken,
             "contact_issued_at" => $contactIssuedAt,
