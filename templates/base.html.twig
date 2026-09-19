@@ -2,8 +2,38 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="google-site-verification" content="LLmRYQior1o9VTi5EB5sedIMjXBz0tCmm6BXXXngOis">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}La cuisine de Maha{% endblock %}</title>
+        <meta name="description" content="{% block description %}Maha, cheffe à domicile à Pins-Justaret (31) : brunchs, repas maison et petits événements, cuisinés chez vous ou dans ma cuisine.{% endblock %}">
+        {% block robots %}{% endblock %}
+        <link rel="canonical" href="{{ site_url ~ app.request.pathInfo }}">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="La cuisine de Maha">
+        <meta property="og:locale" content="fr_FR">
+        <meta property="og:url" content="{{ site_url ~ app.request.pathInfo }}">
+        <meta property="og:title" content="{{ block('title') }}">
+        <meta property="og:description" content="{{ block('description') }}">
+        <meta property="og:image" content="{{ site_url ~ asset('images/home/profil.webp') }}">
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": ["LocalBusiness", "FoodEstablishment"],
+          "@id": "{{ site_url }}/#cheffe",
+          "name": "La cuisine de Maha",
+          "url": "{{ site_url }}/",
+          "image": "{{ site_url ~ asset('images/home/profil.webp') }}",
+          "email": "contact@lacuisinedemaha.fr",
+          "description": "Cheffe à domicile : brunchs, repas maison et petits événements.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pins-Justaret",
+            "postalCode": "31860",
+            "addressCountry": "FR"
+          },
+          "areaServed": "Pins-Justaret et environs"
+        }
+        </script>
         <link rel="icon" href="{{ asset('images/brand/favicon.png') }}" type="image/png">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% block stylesheets %}

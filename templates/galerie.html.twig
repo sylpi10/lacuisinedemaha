@@ -1,12 +1,13 @@
 
 {% extends 'base.html.twig' %}
 {% block title %}Galerie · La cuisine de Maha{% endblock %}
+{% block description %}Galerie photos de La cuisine de Maha : brunchs, batch cooking et repas privés préparés par Maha, cheffe à domicile à Pins-Justaret.{% endblock %}
 {% block body %}
 <section>
   <div class="wrap">
     <div class="section-head center">
       <span class="eyebrow">{{ gallery.galleryName }}</span>
-      <h2>{{ gallery.galleryTitle }}</h2>
+      <h1>{{ gallery.galleryTitle }}</h1>
       <p>
         {{ gallery.description }}
       </p>
