@@ -6,13 +6,9 @@
 <section>
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Formules & tarifs</span>
-      <h1>Choisissez votre formule, on ajuste ensemble le détail</h1>
-      <p>
-        Les prix ci-dessous donnent un repère de départ ; ils sont
-        ajustés selon le nombre de convives, la saison et les produits
-        choisis. À personnaliser avec vos propres tarifs.
-      </p>
+      <span class="eyebrow">{{ header.subtitle }}</span>
+      <h1>{{ header.title }}</h1>
+      <p>{{ header.description }}</p>
     </div>
 
     <div class="formules-grid">
@@ -36,23 +32,20 @@
   </div>
 </section>
 
+{% if faq %}
 <section>
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Infos essentielles</span>
-      <h2>Questions fréquentes</h2>
+      <span class="eyebrow">{{ faq.subtitle }}</span>
+      <h2>{{ faq.title }}</h2>
     </div>
     <div style="max-width: 68ch;">
-      <h3>Comment se déroule une prestation ?</h3>
-      <p>
-        À compléter : réflexion du menu, courses, préparation sur place
-        ou en amont, service, rangement de la cuisine.
-      </p>
-      <h3>Combien de temps à l'avance réserver ?</h3>
-      <p>À compléter selon vos délais habituels.</p>
-      <h3>Peut-on adapter le menu à des allergies ou régimes particuliers ?</h3>
-      <p>À compléter avec votre politique sur les régimes spécifiques.</p>
+      {% for item in faq.items %}
+      <h3>{{ item.question }}</h3>
+      <p>{{ item.answer|nl2br }}</p>
+      {% endfor %}
     </div>
   </div>
 </section>
+{% endif %}
 {% endblock %}

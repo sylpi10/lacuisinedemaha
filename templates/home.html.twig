@@ -7,16 +7,14 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-content">
-      <span class="eyebrow">Cheffe à domicile</span>
-      <h1>La cuisine de Maha</h1>
+      <span class="eyebrow">{{ hero.subtitle }}</span>
+      <h1>{{ hero.title }}</h1>
       <p class="hero-tagline">
-        Des brunchs généreux, des repas faits maison et de petits événements
-        cuisinés avec soin, chez vous ou dans ma cuisine, à Pins-Justaret
-        et aux alentours.
+        {{ hero.description }}
       </p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact/">Réserver une date</a>
-        <a class="btn btn-ghost" href="/formules/">Voir les formules</a>
+        <a class="btn btn-primary" href="{{ path('site_contact') }}">{{ hero.primaryButtonLabel }}</a>
+        <a class="btn btn-ghost" href="{{ path('site_formules') }}">{{ hero.secondaryButtonLabel }}</a>
       </div>
     </div>
     <div class="hero-visual">

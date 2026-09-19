@@ -678,6 +678,10 @@ textarea {
     padding: 48px 0 28px;
 }
 
+.site-footer .contact-info dt {
+    color: var(--yolk-soft);
+}
+
 .site-footer a {
     color: var(--ivory);
     text-decoration: none;

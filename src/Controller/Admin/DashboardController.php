@@ -27,6 +27,11 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard("Dashboard", "fa fa-home");
         yield MenuItem::linkTo(
+            HomeHeroCrudController::class,
+            "Bandeau d'accueil",
+            "fa fa-heading",
+        );
+        yield MenuItem::linkTo(
             PresentationCrudController::class,
             "Présentation",
             "fa fa-align-left",
@@ -35,6 +40,16 @@ class DashboardController extends AbstractDashboardController
             FormulasCrudController::class,
             "Formules",
             "fa fa-utensils",
+        );
+        yield MenuItem::linkTo(
+            FormulasHeaderCrudController::class,
+            "En-tête des formules",
+            "fa fa-heading",
+        );
+        yield MenuItem::linkTo(
+            FaqCrudController::class,
+            "FAQ",
+            "fa fa-circle-question",
         );
         yield MenuItem::linkTo(
             GaleryCrudController::class,
