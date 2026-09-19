@@ -20,7 +20,7 @@
         {% for key, formula in formulas %}
         <div class="formule-card{% if key == 1 %} is-featured{% endif %}">
           <span class="formule-name">{{ formula.title }}</span>
-          <span class="formule-price">{{ formula.price }} / pers.</span>
+          <span class="formule-price">{{ formula.price }}</span>
           <ul>
             {% for item in formula.itemList|split("\n") %}
               {% set item = item|trim %}
