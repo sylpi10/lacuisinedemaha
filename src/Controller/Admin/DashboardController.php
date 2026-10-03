@@ -77,6 +77,11 @@ class DashboardController extends AbstractDashboardController
             "fa fa-pen",
         );
         yield MenuItem::linkTo(
+            LegalPageCrudController::class,
+            "Mentions légales & CGV",
+            "fa fa-scale-balanced",
+        );
+        yield MenuItem::linkTo(
             UserCrudController::class,
             "Utilisateurs",
             "fa fa-user-shield",

@@ -670,6 +670,34 @@ textarea {
     color: var(--pine);
 }
 
+/* ---------- Texte riche (pages légales, contenu saisi en BO) ---------- */
+
+.rich-text {
+    max-width: 68ch;
+}
+
+.rich-text h2 {
+    font-size: 1.4rem;
+    margin-top: 1.8em;
+}
+
+.rich-text h2:first-child {
+    margin-top: 0;
+}
+
+/* Trix enveloppe les paragraphes dans des <div> */
+.rich-text > div,
+.rich-text ul,
+.rich-text ol,
+.rich-text blockquote {
+    margin: 0 0 1em;
+}
+
+.rich-text ul,
+.rich-text ol {
+    padding-left: 1.4em;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {

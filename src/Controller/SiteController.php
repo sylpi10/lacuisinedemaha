@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\LegalPage;
 use App\Repository\FormulasRepository;
 use App\Repository\HomeConceptRepository;
 use App\Repository\HomeHeroRepository;
+use App\Repository\LegalPageRepository;
 use App\Repository\GaleryRepository;
 use App\Repository\PresentationRepository;
 use App\Repository\ReviewsRepository;
@@ -40,5 +42,25 @@ final class SiteController extends AbstractController
         return $this->render("galerie.html.twig", [
             "gallery" => $this->galeryRepository->getContent(),
         ]);
+    }
+
+    #[Route("/mentions-legales", name: "site_mentions_legales")]
+    public function mentionsLegales(LegalPageRepository $legalPageRepository): Response
+    {
+        return $this->renderLegalPage($legalPageRepository, LegalPage::MENTIONS_LEGALES);
+    }
+
+    #[Route("/cgv", name: "site_cgv")]
+    public function cgv(LegalPageRepository $legalPageRepository): Response
+    {
+        return $this->renderLegalPage($legalPageRepository, LegalPage::CGV);
+    }
+
+    private function renderLegalPage(LegalPageRepository $legalPageRepository, string $slug): Response
+    {
+        $page = $legalPageRepository->findOneBySlug($slug)
+            ?? throw $this->createNotFoundException();
+
+        return $this->render("legal_page.html.twig", ["page" => $page]);
     }
 }

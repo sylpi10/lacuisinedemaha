@@ -13,6 +13,8 @@ class SitemapController extends AbstractController
         "site_formules" => "0.8",
         "site_galerie" => "0.6",
         "site_contact" => "0.6",
+        "site_mentions_legales" => "0.2",
+        "site_cgv" => "0.2",
     ];
 
     #[Route("/sitemap.xml", name: "site_sitemap", format: "xml")]

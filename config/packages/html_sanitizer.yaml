@@ -1,0 +1,8 @@
+framework:
+    html_sanitizer:
+        sanitizers:
+            # contenu riche saisi en BO (éditeur Trix) et affiché avec |sanitize_html
+            app.rich_text_sanitizer:
+                allow_safe_elements: true
+                allowed_link_schemes: ['http', 'https', 'mailto', 'tel']
+                allow_relative_links: true

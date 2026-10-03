@@ -67,7 +67,19 @@
           <nav><ul class="main-nav"><li><a href="{{ path('site_home') }}">Accueil</a></li><li><a href="{{ path('site_formules') }}">Formules &amp; tarifs</a></li><li><a href="{{ path('site_galerie') }}">Galerie</a></li><li><a href="{{ path('site_contact') }}">Contact</a></li></ul></nav>
         </div></header>
         <main>{% block body %}{% endblock %}</main>
-        <footer class="site-footer"><div class="wrap"><div class="footer-grid"><div><div class="brand" style="color: var(--ivory);">La cuisine de Maha</div><p style="max-width: 32ch; opacity: .85; margin-top: 10px;">Brunchs, repas maison et petits événements, préparés dans ma cuisine ou dans la vôtre.</p></div><div><dl class="contact-info"><dt>Contact</dt><dd><a href="mailto:contact@lacuisinedemah31.fr">contact@lacuisinedemaha31.fr</a></dd></dl></div></div><div class="footer-bottom"><span>&copy; 2026 La cuisine de Maha — Tous droits réservés</span><span>Site conçu et entretenu à la main</span></div></div></footer>
+        <footer class="site-footer"><div class="wrap"><div class="footer-grid"><div>
+            <div class="brand" style="color: var(--ivory);">La cuisine de Maha</div>
+            <p style="max-width: 32ch; opacity: .85; margin-top: 10px;">
+                Brunchs, repas maison et petits événements, préparés dans ma cuisine ou dans la vôtre.</p>
+        </div><div>
+            <dl class="contact-info"><dt>Contact</dt><dd>
+                <a href="mailto:contact@lacuisinedemah31.fr">contact@lacuisinedemaha31.fr</a></dd></dl>
+        </div></div><div class="footer-bottom">
+            <p>&copy; {{ 'now'|date('Y') }} -
+              <a href="{{ 'https://sylvainpillet.com' }}">S Pillet</a>
+                — Tous droits réservés</p>
+            <p><a href="{{ path('site_mentions_legales') }}">Mentions légales</a> · <a href="{{ path('site_cgv') }}">CGV</a></p>
+        </div></footer>
         <script src="{{ asset('js/nav.js') }}"></script>
     </body>
 </html>

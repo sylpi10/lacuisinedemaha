@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.title }} · La cuisine de Maha{% endblock %}
+{% block description %}{{ page.metaDescription ?: page.title ~ ' du site La cuisine de Maha, cheffe à domicile à Pins-Justaret (31).' }}{% endblock %}
+{% block body %}
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      {% if page.subtitle %}<span class="eyebrow">{{ page.subtitle }}</span>{% endif %}
+      <h1>{{ page.title }}</h1>
+    </div>
+
+    <div class="rich-text">
+      {{ page.content|sanitize_html('app.rich_text_sanitizer') }}
+    </div>
+  </div>
+</section>
+{% endblock %}
