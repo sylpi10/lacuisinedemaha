@@ -10,6 +10,7 @@ RSYNC_EXCLUDES = \
 	--exclude vendor/ \
 	--exclude .git/ \
 	--exclude .env.local \
+	--exclude .env.local.php \
 	--exclude .env.dev \
 	--exclude .env.deploy \
 	--exclude var/ \
@@ -24,7 +25,8 @@ deploy:
 
 	ssh $(SERVER_USER)@$(SERVER_HOST) "\
 		cd $(SERVER_PATH) && \
-		composer install --no-dev --optimize-autoloader && \
+		composer install --no-dev --optimize-autoloader --classmap-authoritative && \
+		composer dump-env prod && \
 		php bin/console cache:clear --env=prod \
 	"
 

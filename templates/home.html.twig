@@ -79,7 +79,7 @@
       {% endfor %}
     </div>
     <p style="text-align:center; margin-top: 36px;">
-      <a class="btn btn-ghost" href="/galerie/">Voir toute la galerie</a>
+      <a class="btn btn-ghost" href="{{ path('site_galerie') }}">Voir toute la galerie</a>
     </p>
   </div>
 </section>
@@ -113,7 +113,7 @@
       Écrivez-moi avec ces quelques informations et je reviens vers vous
       rapidement pour construire le menu ensemble.
     </p>
-    <a class="btn btn-primary" href="/contact/">Me contacter</a>
+    <a class="btn btn-primary" href="{{ path('site_contact') }}">Me contacter</a>
   </div>
 </section>
 {% endblock %}
