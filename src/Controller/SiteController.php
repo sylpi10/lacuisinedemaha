@@ -16,6 +16,22 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class SiteController extends AbstractController
 {
+    /** Communes citées sur la page de référencement local (liste + données structurées). */
+    private const LOCAL_AREAS = [
+        "Pins-Justaret",
+        "Toulouse",
+        "Roques",
+        "Pinsaguel",
+        "Portet-sur-Garonne",
+        "Villate",
+        "Saubens",
+        "Roquettes",
+        "Labarthe-sur-Lèze",
+        "Muret",
+        "Lacroix-Falgarde",
+        "Cugnaux",
+    ];
+
     public function __construct(protected GaleryRepository $galeryRepository) {}
 
     #[Route("/", name: "site_home")]
@@ -41,6 +57,19 @@ final class SiteController extends AbstractController
     {
         return $this->render("galerie.html.twig", [
             "gallery" => $this->galeryRepository->getContent(),
+        ]);
+    }
+
+    #[Route("/cheffe-a-domicile-toulouse", name: "site_cheffe_toulouse")]
+    public function cheffeToulouse(
+        FormulasRepository $formulasRepository,
+        ReviewsRepository $reviewsRepository,
+    ): Response {
+        return $this->render("cheffe_toulouse.html.twig", [
+            "areas" => self::LOCAL_AREAS,
+            "formulas" => $formulasRepository->findAll(),
+            "gallery" => $this->galeryRepository->getContent(),
+            "reviews" => $reviewsRepository->findAll(),
         ]);
     }
 

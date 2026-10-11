@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+{% block title %}Cheffe à domicile à Toulouse et Pins-Justaret · La cuisine de Maha{% endblock %}
+{% block description %}Maha, cheffe à domicile à Pins-Justaret, au sud de Toulouse : brunchs, repas maison et petits événements à Roques, Pinsaguel, Portet-sur-Garonne et alentours.{% endblock %}
+{% block preload %}<link rel="preload" as="image" href="{{ asset('images/home/profil.webp') }}" type="image/webp" fetchpriority="high">{% endblock %}
+{% block javascripts %}
+<script type="application/ld+json">
+{{ {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  'name': 'Cheffe à domicile à Toulouse et Pins-Justaret',
+  'serviceType': 'Cheffe à domicile',
+  'url': site_url ~ path('site_cheffe_toulouse'),
+  'provider': {'@id': site_url ~ '/#cheffe'},
+  'areaServed': areas|map(area => {'@type': 'City', 'name': area}),
+}|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_UNESCAPED_SLASHES'))|raw }}
+</script>
+{% endblock %}
+{% block body %}
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Pins-Justaret · Toulouse sud</span>
+      <h1>Cheffe à domicile à Toulouse et Pins-Justaret</h1>
+      <p class="hero-tagline">
+        Je cuisine pour vous des brunchs, des repas faits maison et de petits
+        événements, chez vous ou dans ma cuisine, à Pins-Justaret et dans les
+        communes du sud toulousain.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="{{ path('site_contact') }}">Réserver une date</a>
+        <a class="btn btn-ghost" href="{{ path('site_formules') }}">Voir les formules</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <span class="yolk-dot" aria-hidden="true"></span>
+      <div class="plate-frame">
+        <img src="{{ asset('images/home/profil.webp') }}" alt="Maha, cheffe à domicile à Pins-Justaret, près de Toulouse" width="442" height="442" fetchpriority="high">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cheffe">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">La cheffe</span>
+      <h2>Une cheffe à domicile au sud de Toulouse</h2>
+    </div>
+    <div class="local-text">
+      <p>
+        Je m'appelle Maha. Après une reconversion professionnelle et un CAP
+        Cuisine, j'ai fait de ma passion mon métier. Installée à
+        Pins-Justaret, en Haute-Garonne, je me déplace chez les particuliers
+        de Toulouse et des communes voisines pour cuisiner sur place.
+      </p>
+      <p>
+        Ma cuisine est 100&nbsp;% maison, préparée avec de bons produits et
+        adaptée à vos envies comme à vos contraintes. Vous recevez, je
+        m'occupe du reste&nbsp;: le menu, les courses, la préparation et le
+        service, dans le respect des règles d'hygiène alimentaire.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="prestations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Les prestations</span>
+      <h2>Brunch, repas et petits événements à domicile</h2>
+      <p>
+        Les mêmes formules à Toulouse, à Pins-Justaret et dans toutes les
+        communes desservies. Le menu se construit avec vous, selon l'occasion
+        et le nombre de convives.
+      </p>
+    </div>
+    <div class="concept-grid">
+      {% for formula in formulas %}
+      <div class="concept-card">
+        <h3>{{ formula.title }}</h3>
+        <p>{{ formula.description|nl2br }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="local-text" style="margin-top: 40px;">
+      <h3>Batch cooking&nbsp;: les repas de la semaine, faits maison</h3>
+      <p>
+        Je prépare aussi vos repas de la semaine en une seule fois. Vous
+        gardez des plats maison prêts à réchauffer, sans passer vos soirées
+        en cuisine.
+      </p>
+    </div>
+    <p style="margin-top: 36px;">
+      <a class="btn btn-ghost" href="{{ path('site_formules') }}">Voir les formules et tarifs</a>
+    </p>
+  </div>
+</section>
+
+<section id="communes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Zone d'intervention</span>
+      <h2>De Pins-Justaret à Toulouse&nbsp;: les communes desservies</h2>
+      <p>
+        Pins-Justaret est mon point de départ. Je me déplace à Toulouse et
+        dans les communes du sud de l'agglomération, le long de la Garonne et
+        de l'Ariège.
+      </p>
+    </div>
+    <ul class="zones-list">
+      {% for area in areas %}
+      <li>{{ area }}</li>
+      {% endfor %}
+    </ul>
+    <p class="local-text" style="margin-top: 28px;">
+      Votre commune n'est pas dans la liste&nbsp;?
+      <a href="{{ path('site_contact') }}">Écrivez-moi</a>, je vous dis
+      rapidement si je peux venir jusqu'à vous.
+    </p>
+  </div>
+</section>
+
+{% if gallery and gallery.images|length > 0 %}
+<section id="galerie-apercu">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">En images</span>
+      <h2>Quelques plats servis autour de Toulouse</h2>
+    </div>
+    <div class="gallery-grid">
+      {% for photo in gallery.images|slice(0, 4) %}
+      <figure>
+        <div class="plate-frame">
+          <img src="/uploads/galerie/{{ photo.image }}" alt="Plat cuisiné par Maha, cheffe à domicile près de Toulouse" loading="lazy" width="245" height="245">
+        </div>
+      </figure>
+      {% endfor %}
+    </div>
+    <p style="text-align:center; margin-top: 36px;">
+      <a class="btn btn-ghost" href="{{ path('site_galerie') }}">Voir toute la galerie</a>
+    </p>
+  </div>
+</section>
+{% endif %}
+
+{% if reviews|length > 0 %}
+<section id="avis">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Avis</span>
+      <h2>Ce qu'en disent les convives</h2>
+    </div>
+    <div class="avis-grid">
+      {% for review in reviews %}
+      <div class="avis-card">
+        <p>{{ review.content }}</p>
+        <p class="avis-signature">— {{ review.author }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="cta-final">
+  <div class="wrap" style="text-align:center;">
+    <h2>Un repas à organiser à Toulouse ou à Pins-Justaret&nbsp;?</h2>
+    <p style="max-width: 50ch; margin: 0 auto 28px;">
+      Donnez-moi la date, la commune et le nombre de convives&nbsp;: je
+      reviens vers vous rapidement pour construire le menu ensemble.
+    </p>
+    <a class="btn btn-primary" href="{{ path('site_contact') }}">Me contacter</a>
+  </div>
+</section>
+{% endblock %}

@@ -11,6 +11,7 @@ class SitemapController extends AbstractController
     private const PAGES = [
         "site_home" => "1.0",
         "site_formules" => "0.8",
+        "site_cheffe_toulouse" => "0.8",
         "site_galerie" => "0.6",
         "site_contact" => "0.6",
         "site_mentions_legales" => "0.2",

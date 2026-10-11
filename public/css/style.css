@@ -698,6 +698,29 @@ textarea {
     padding-left: 1.4em;
 }
 
+/* ---------- Page locale : communes desservies ---------- */
+
+.local-text {
+    max-width: 68ch;
+}
+
+.zones-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.zones-list li {
+    padding: 6px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--pine-deep);
+    font-weight: 600;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
