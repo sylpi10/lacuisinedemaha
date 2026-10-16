@@ -1,0 +1,4 @@
+framework:
+    notifier:
+        texter_transports:
+            ntfy: 'ntfy://default/%env(NTFY_TOPIC)%'

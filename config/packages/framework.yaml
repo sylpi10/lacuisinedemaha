@@ -5,6 +5,12 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    # seul usage actuel : l'alerte ntfy, envoyée pendant la requête du visiteur
+    http_client:
+        default_options:
+            timeout: 5
+            max_duration: 10
+
     #esi: true
     #fragments: true
 
