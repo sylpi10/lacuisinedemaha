@@ -34,7 +34,7 @@
           "name": "La cuisine de Maha",
           "url": "{{ site_url }}/",
           "image": "{{ site_url ~ asset('images/home/profil.webp') }}",
-          "email": "contact@lacuisinedemaha31.fr",
+          "email": "{{ contact_email() }}",
           "description": "Cheffe à domicile : brunchs, repas maison et petits événements.",
           "address": {
             "@type": "PostalAddress",
@@ -75,7 +75,7 @@
                 Brunchs, repas maison et petits événements, préparés dans ma cuisine ou dans la vôtre.</p>
         </div><div>
             <dl class="contact-info"><dt>Contact</dt><dd>
-                <a href="mailto:contact@lacuisinedemah31.fr">contact@lacuisinedemaha31.fr</a></dd></dl>
+                <a href="mailto:{{ contact_email() }}">{{ contact_email() }}</a></dd></dl>
         </div></div><div class="footer-bottom">
             <p>&copy; {{ 'now'|date('Y') }} -
               <a href="{{ 'https://sylvainpillet.com' }}">S Pillet</a>

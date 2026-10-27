@@ -10,10 +10,8 @@
       <h1>{{ page.title }}</h1>
       <p>{{ page.description }}</p>
       <dl>
-        {% if page.email %}
         <dt>E-mail</dt>
-        <dd><a href="mailto:{{ page.email }}">{{ page.email }}</a></dd>
-        {% endif %}
+        <dd><a href="mailto:{{ contact_email() }}">{{ contact_email() }}</a></dd>
         {% if page.phone %}
         <dt>Téléphone</dt>
         <dd><a href="tel:{{ page.phone|replace({' ': '', '.': ''}) }}">{{ page.phone }}</a></dd>

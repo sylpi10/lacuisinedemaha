@@ -14,12 +14,15 @@ use Symfony\Component\Notifier\TexterInterface;
 
 final class ContactMailer
 {
-    private const ADDRESS = 'contact@lacuisinedemaha31.fr';
+    // expéditeur fixe : le serveur SMTP doit être autorisé à envoyer pour ce domaine,
+    // ce qui n'est pas garanti pour une adresse saisie dans l'admin
+    private const FROM = SiteContact::DEFAULT_EMAIL;
 
     public function __construct(
         private readonly MailerInterface $mailer,
         private readonly TexterInterface $texter,
         private readonly LoggerInterface $logger,
+        private readonly SiteContact $siteContact,
         #[Autowire(env: 'NTFY_TOPIC')] private readonly string $ntfyTopic,
     ) {
     }
@@ -31,9 +34,9 @@ final class ContactMailer
     public function send(Contact $contact): void
     {
         $email = new Email()
-            ->from(self::ADDRESS)
+            ->from(self::FROM)
             ->replyTo($contact->getSenderEmail())
-            ->to(self::ADDRESS)
+            ->to($this->siteContact->getEmail())
             ->subject('Nouveau message depuis La Cuisine de Maha')
             ->text($this->buildEmailBody($contact));
 

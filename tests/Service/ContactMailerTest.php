@@ -4,6 +4,7 @@ namespace App\Tests\Service;
 
 use App\Entity\Contact;
 use App\Service\ContactMailer;
+use App\Service\SiteContact;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\Mailer\Exception\TransportException as MailerTransportException;
@@ -21,6 +22,7 @@ final class ContactMailerTest extends KernelTestCase
         $mailer = $this->createMock(MailerInterface::class);
         $mailer->expects(self::once())->method('send')->with(self::callback(
             static fn (Email $email) => 'jeanne@example.com' === $email->getReplyTo()[0]->getAddress()
+                && SiteContact::DEFAULT_EMAIL === $email->getTo()[0]->getAddress()
                 && str_contains($email->getTextBody(), 'Nom : Jeanne Dupont'),
         ));
         $texter = $this->createMock(TexterInterface::class);
@@ -75,7 +77,8 @@ final class ContactMailerTest extends KernelTestCase
         $texter = $this->createMock(TexterInterface::class);
         $texter->expects(self::never())->method('send');
 
-        new ContactMailer($mailer, $texter, static::getContainer()->get('logger'), '')->send($this->contact());
+        $container = static::getContainer();
+        new ContactMailer($mailer, $texter, $container->get('logger'), $container->get(SiteContact::class), '')->send($this->contact());
     }
 
     private function contactMailer(MailerInterface $mailer, TexterInterface $texter): ContactMailer
