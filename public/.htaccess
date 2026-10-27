@@ -21,12 +21,18 @@ DirectoryIndex index.php
     RewriteCond %{ENV:REDIRECT_STATUS} =""
     RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
 
+    # Fichiers générés par AssetMapper (nom avec hash) : repérés ici pour le
+    # cache "1 an" plus bas. Uniquement s'ils existent : une 404 ne doit pas
+    # être mise en cache.
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^assets/ - [E=HASHED_ASSET:1]
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ %{ENV:BASE}/index.php [L]
 </IfModule>
 
-# Cache navigateur pour les assets statiques (pas de cache-busting sur les
-# assets pour l'instant, donc durées modérées plutot qu'un cache "1 an").
+# Cache navigateur des fichiers statiques de public/ (images, uploads, polices).
+# Leur nom ne change pas quand leur contenu change : durées modérées.
 <IfModule mod_expires.c>
     ExpiresActive On
 
@@ -37,16 +43,13 @@ DirectoryIndex index.php
     ExpiresByType image/svg+xml "access plus 1 month"
     ExpiresByType image/x-icon "access plus 1 month"
 
-    ExpiresByType text/css "access plus 1 week"
-    ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType text/javascript "access plus 1 week"
-
     ExpiresByType font/woff "access plus 1 month"
     ExpiresByType font/woff2 "access plus 1 month"
 </IfModule>
 
+# CSS/JS servis par AssetMapper depuis /assets/ : le hash dans le nom change à
+# chaque modification, le navigateur peut donc les garder 1 an sans revérifier.
 <IfModule mod_headers.c>
-    <FilesMatch "\.(webp|jpe?g|png|gif|svg|ico|css|js|woff2?)$">
-        Header append Cache-Control "public"
-    </FilesMatch>
+    Header set Cache-Control "public, max-age=31536000, immutable" env=HASHED_ASSET
+    Header unset Expires env=HASHED_ASSET
 </IfModule>
