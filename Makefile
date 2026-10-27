@@ -17,7 +17,8 @@ RSYNC_EXCLUDES = \
 	--exclude Makefile \
 	--exclude docke/* \
 	--exclude tests/ \
-	--exclude public/bundles/
+	--exclude public/bundles/ \
+    --exclude public/assets/
 
 deploy:
 	rsync -av --itemize-changes ./ $(SERVER_USER)@$(SERVER_HOST):~/$(SERVER_PATH) \
@@ -27,6 +28,8 @@ deploy:
 		cd $(SERVER_PATH) && \
 		composer install --no-dev --optimize-autoloader --classmap-authoritative && \
 		composer dump-env prod && \
+		php bin/console importmap:install && \
+		php bin/console asset-map:compile && \
 		php bin/console cache:clear --env=prod \
 	"
 

@@ -44,5 +44,5 @@ jobs:
             # crée la base vide puis les tables, comme en prod
             - run: php bin/console doctrine:database:create --env=test
             - run: php bin/console doctrine:migrations:migrate --env=test --no-interaction
-
+            - run: php bin/console importmap:install
             - run: php bin/phpunit

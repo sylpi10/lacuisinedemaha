@@ -46,11 +46,11 @@
         }
         </script>
         <link rel="icon" href="{{ asset('images/brand/favicon.png') }}" type="image/png">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
 
         {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
@@ -61,10 +61,12 @@
         {% endif %}
     </head>
     <body>
-        <header class="site-header"><div class="wrap">
+        <header class="site-header" data-controller="nav"><div class="wrap">
           <a class="brand" href="{{ path('site_home') }}"><img class="brand-logo" src="{{ asset('images/brand/logo.webp') }}" alt="" width="42" height="40">La cuisine de <span>Maha</span></a>
-          <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">&#9776;</button>
-          <nav><ul class="main-nav"><li><a href="{{ path('site_home') }}">Accueil</a></li><li><a href="{{ path('site_formules') }}">Formules &amp; tarifs</a></li><li><a href="{{ path('site_galerie') }}">Galerie</a></li><li><a href="{{ path('site_contact') }}">Contact</a></li></ul></nav>
+          <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"
+              data-nav-target="button" data-action="nav#toggle">
+              &#9776;</button>
+          <nav><ul class="main-nav" data-nav-target="menu"><li><a href="{{ path('site_home') }}">Accueil</a></li><li><a href="{{ path('site_formules') }}">Formules &amp; tarifs</a></li><li><a href="{{ path('site_galerie') }}">Galerie</a></li><li><a href="{{ path('site_contact') }}">Contact</a></li></ul></nav>
         </div></header>
         <main>{% block body %}{% endblock %}</main>
         <footer class="site-footer"><div class="wrap"><div class="footer-grid"><div>
@@ -80,6 +82,5 @@
                 — Tous droits réservés</p>
             <p><a href="{{ path('site_cheffe_toulouse') }}">Cheffe à domicile à Toulouse</a> · <a href="{{ path('site_mentions_legales') }}">Mentions légales</a> · <a href="{{ path('site_cgv') }}">CGV</a></p>
         </div></div></footer>
-        <script src="{{ asset('js/nav.js') }}"></script>
     </body>
 </html>
