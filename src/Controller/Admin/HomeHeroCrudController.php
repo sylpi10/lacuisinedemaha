@@ -26,12 +26,12 @@ class HomeHeroCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("subtitle", "Sous-titre (au-dessus du titre)")->setRequired(false),
-            TextField::new("title", "Titre")->setRequired(false),
-            TextareaField::new("description")->setRequired(false),
-            TextField::new("primaryButtonLabel", "Bouton principal (vers Contact)")->setRequired(false),
-            TextField::new("secondaryButtonLabel", "Bouton secondaire (vers Formules)")->setRequired(false),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('subtitle', 'Sous-titre (au-dessus du titre)')->setRequired(false),
+            TextField::new('title', 'Titre')->setRequired(false),
+            TextareaField::new('description')->setRequired(false),
+            TextField::new('primaryButtonLabel', 'Bouton principal (vers Contact)')->setRequired(false),
+            TextField::new('secondaryButtonLabel', 'Bouton secondaire (vers Formules)')->setRequired(false),
         ];
     }
 }

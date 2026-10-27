@@ -34,15 +34,13 @@ class Galery
     /**
      * @var Collection<int, GaleryImage>
      */
-    #[
-        ORM\OneToMany(
-            targetEntity: GaleryImage::class,
-            mappedBy: "galery",
-            orphanRemoval: true,
-            cascade: ["persist"],
-        ),
-    ]
-    #[ORM\OrderBy(["position" => "ASC"])]
+    #[ORM\OneToMany(
+        targetEntity: GaleryImage::class,
+        mappedBy: 'galery',
+        orphanRemoval: true,
+        cascade: ['persist'],
+    ),]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $images;
 
     public function __construct()

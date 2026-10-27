@@ -18,7 +18,8 @@ class FormulasCrudController extends AbstractCrudController
 {
     public function __construct(
         private readonly ImageWebpConverter $webpConverter,
-    ) {}
+    ) {
+    }
 
     public static function getEntityFqcn(): string
     {
@@ -28,8 +29,8 @@ class FormulasCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Formule")
-            ->setEntityLabelInPlural("Formules");
+            ->setEntityLabelInSingular('Formule')
+            ->setEntityLabelInPlural('Formules');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -37,8 +38,8 @@ class FormulasCrudController extends AbstractCrudController
         return parent::configureActions($actions)->update(
             Crud::PAGE_INDEX,
             Action::NEW,
-            fn(Action $action) => $action->setLabel(
-                "Ajouter une nouvelle formule",
+            fn (Action $action) => $action->setLabel(
+                'Ajouter une nouvelle formule',
             ),
         );
     }
@@ -46,19 +47,19 @@ class FormulasCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("title")->setLabel("Titre"),
-            TextareaField::new("description"),
-            TextField::new("price")->setLabel("prix"),
-            TextareaField::new("itemList")
-                ->setHelp("Une ligne par élément inclus dans la formule.")
-                ->setLabel("liste des plats"),
-            ImageField::new("image")
-                ->setBasePath("/uploads/formules")
-                ->setUploadDir("public/uploads/formules")
-                ->setUploadedFileNamePattern("[randomhash].webp")
+            IdField::new('id')->hideOnForm(),
+            TextField::new('title')->setLabel('Titre'),
+            TextareaField::new('description'),
+            TextField::new('price')->setLabel('prix'),
+            TextareaField::new('itemList')
+                ->setHelp('Une ligne par élément inclus dans la formule.')
+                ->setLabel('liste des plats'),
+            ImageField::new('image')
+                ->setBasePath('/uploads/formules')
+                ->setUploadDir('public/uploads/formules')
+                ->setUploadedFileNamePattern('[randomhash].webp')
                 ->setFormTypeOption(
-                    "upload_new",
+                    'upload_new',
                     $this->webpConverter->uploadCallback(800),
                 )
                 ->setFileConstraints(
@@ -67,7 +68,7 @@ class FormulasCrudController extends AbstractCrudController
                     ),
                 )
                 ->mimeTypes(
-                    implode(",", ImageWebpConverter::SUPPORTED_MIME_TYPES),
+                    implode(',', ImageWebpConverter::SUPPORTED_MIME_TYPES),
                 )
                 ->setRequired(false),
         ];

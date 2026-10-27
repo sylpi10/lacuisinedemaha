@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: LegalPageRepository::class)]
 class LegalPage
 {
-    public const MENTIONS_LEGALES = "mentions-legales";
-    public const CGV = "cgv";
+    public const MENTIONS_LEGALES = 'mentions-legales';
+    public const CGV = 'cgv';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

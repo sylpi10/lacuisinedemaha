@@ -19,17 +19,17 @@ class FormulasHeaderCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("En-tête des formules")
-            ->setEntityLabelInPlural("En-tête des formules");
+            ->setEntityLabelInSingular('En-tête des formules')
+            ->setEntityLabelInPlural('En-tête des formules');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("subtitle", "Sous-titre (au-dessus du titre)")->setRequired(false),
-            TextField::new("title", "Titre")->setRequired(false),
-            TextareaField::new("description")->setRequired(false),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('subtitle', 'Sous-titre (au-dessus du titre)')->setRequired(false),
+            TextField::new('title', 'Titre')->setRequired(false),
+            TextareaField::new('description')->setRequired(false),
         ];
     }
 }

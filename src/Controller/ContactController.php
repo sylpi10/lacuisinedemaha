@@ -14,15 +14,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ContactController extends AbstractController
 {
-    private const SESSION_TOKEN_KEY = "contact_form_token";
-    private const SESSION_ISSUED_AT_KEY = "contact_form_issued_at";
+    private const SESSION_TOKEN_KEY = 'contact_form_token';
+    private const SESSION_ISSUED_AT_KEY = 'contact_form_issued_at';
 
     // en dessous, un envoi est trop rapide pour être humain ; au-dessus, le
     // formulaire est resté ouvert trop longtemps et on préfère le regénérer
     private const MIN_FILL_SECONDS = 4;
     private const MAX_FORM_AGE_SECONDS = 86400;
 
-    #[Route("/contact", name: "site_contact")]
+    #[Route('/contact', name: 'site_contact')]
     public function contact(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -38,7 +38,7 @@ final class ContactController extends AbstractController
                 // on ne donne aucune indication à un robot : il voit le même
                 // écran de succès qu'un envoi légitime, sans que rien ne soit
                 // enregistré ni envoyé.
-                return $this->redirectToRoute("site_contact");
+                return $this->redirectToRoute('site_contact');
             }
 
             $entityManager->persist($contact);
@@ -47,20 +47,20 @@ final class ContactController extends AbstractController
             $contactMailer->send($contact);
 
             $this->addFlash(
-                "success",
-                "Votre demande a bien été envoyée, je reviens vers vous rapidement !",
+                'success',
+                'Votre demande a bien été envoyée, je reviens vers vous rapidement !',
             );
 
-            return $this->redirectToRoute("site_contact");
+            return $this->redirectToRoute('site_contact');
         }
 
         [$contactToken, $contactIssuedAt] = $this->issueAntiSpamGuards($request);
 
-        return $this->render("contact.html.twig", [
-            "page" => $contactPageRepository->getContent(),
-            "contactForm" => $form,
-            "contact_token" => $contactToken,
-            "contact_issued_at" => $contactIssuedAt,
+        return $this->render('contact.html.twig', [
+            'page' => $contactPageRepository->getContent(),
+            'contactForm' => $form,
+            'contact_token' => $contactToken,
+            'contact_issued_at' => $contactIssuedAt,
         ]);
     }
 
@@ -93,16 +93,16 @@ final class ContactController extends AbstractController
      */
     private function passesAntiSpamGuards(Request $request): bool
     {
-        $honeypot = trim((string) $request->request->get("website", ""));
-        if ("" !== $honeypot) {
+        $honeypot = trim((string) $request->request->get('website', ''));
+        if ('' !== $honeypot) {
             return false;
         }
 
         $session = $request->getSession();
 
-        $submittedToken = (string) $request->request->get("contact_token", "");
-        $sessionToken = (string) $session->get(self::SESSION_TOKEN_KEY, "");
-        if ("" === $sessionToken || !hash_equals($sessionToken, $submittedToken)) {
+        $submittedToken = (string) $request->request->get('contact_token', '');
+        $sessionToken = (string) $session->get(self::SESSION_TOKEN_KEY, '');
+        if ('' === $sessionToken || !hash_equals($sessionToken, $submittedToken)) {
             return false;
         }
 

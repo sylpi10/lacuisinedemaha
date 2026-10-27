@@ -19,20 +19,20 @@ class ContactPageCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Page contact")
-            ->setEntityLabelInPlural("Page contact");
+            ->setEntityLabelInSingular('Page contact')
+            ->setEntityLabelInPlural('Page contact');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("subtitle", "Sous-titre (au-dessus du titre)")->setRequired(false),
-            TextField::new("title", "Titre")->setRequired(false),
-            TextareaField::new("description")->setRequired(false),
-            TextField::new("email", "E-mail")->setRequired(false),
-            TextField::new("phone", "Téléphone")->setRequired(false),
-            TextField::new("serviceArea", "Zone d'intervention")->setRequired(false),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('subtitle', 'Sous-titre (au-dessus du titre)')->setRequired(false),
+            TextField::new('title', 'Titre')->setRequired(false),
+            TextareaField::new('description')->setRequired(false),
+            TextField::new('email', 'E-mail')->setRequired(false),
+            TextField::new('phone', 'Téléphone')->setRequired(false),
+            TextField::new('serviceArea', "Zone d'intervention")->setRequired(false),
         ];
     }
 }

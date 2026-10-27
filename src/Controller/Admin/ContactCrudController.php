@@ -26,8 +26,8 @@ class ContactCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Demande de contact")
-            ->setEntityLabelInPlural("Demandes de contact");
+            ->setEntityLabelInSingular('Demande de contact')
+            ->setEntityLabelInPlural('Demandes de contact');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -39,17 +39,17 @@ class ContactCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("senderName", "Nom"),
-            EmailField::new("senderEmail", "E-mail"),
-            TelephoneField::new("senderPhone", "Téléphone"),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('senderName', 'Nom'),
+            EmailField::new('senderEmail', 'E-mail'),
+            TelephoneField::new('senderPhone', 'Téléphone'),
             AssociationField::new(
-                "wishedFormula",
-                "Formule souhaitée",
+                'wishedFormula',
+                'Formule souhaitée',
             )->setRequired(false),
-            IntegerField::new("senderWishedNumber", "Nombre de convives"),
-            DateField::new("senderDate", "Date envisagée"),
-            TextareaField::new("senderMessage", "Message"),
+            IntegerField::new('senderWishedNumber', 'Nombre de convives'),
+            DateField::new('senderDate', 'Date envisagée'),
+            TextareaField::new('senderMessage', 'Message'),
         ];
     }
 }

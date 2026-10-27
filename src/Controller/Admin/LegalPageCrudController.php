@@ -20,8 +20,8 @@ class LegalPageCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Page légale")
-            ->setEntityLabelInPlural("Pages légales");
+            ->setEntityLabelInSingular('Page légale')
+            ->setEntityLabelInPlural('Pages légales');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -33,17 +33,17 @@ class LegalPageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new("title", "Titre"),
-            TextField::new("slug", "Adresse")->hideOnForm(),
-            TextField::new("subtitle", "Sous-titre (au-dessus du titre)")->setRequired(false)->hideOnIndex(),
-            TextField::new("metaDescription", "Description (moteurs de recherche)")->setRequired(false)->hideOnIndex(),
-            TextEditorField::new("content", "Contenu")
+            TextField::new('title', 'Titre'),
+            TextField::new('slug', 'Adresse')->hideOnForm(),
+            TextField::new('subtitle', 'Sous-titre (au-dessus du titre)')->setRequired(false)->hideOnIndex(),
+            TextField::new('metaDescription', 'Description (moteurs de recherche)')->setRequired(false)->hideOnIndex(),
+            TextEditorField::new('content', 'Contenu')
                 ->hideOnIndex()
                 ->setNumOfRows(30)
                 // le bouton « titre » de Trix produit des <h2> (le <h1> est le titre de la page)
                 ->setTrixEditorConfig([
-                    "blockAttributes" => [
-                        "heading1" => ["tagName" => "h2"],
+                    'blockAttributes' => [
+                        'heading1' => ['tagName' => 'h2'],
                     ],
                 ]),
         ];

@@ -27,7 +27,6 @@ class FaqItem
     #[ORM\JoinColumn(nullable: false)]
     private ?Faq $faq = null;
 
-
     public function __toString(): string
     {
         return $this->question ?? '';

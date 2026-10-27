@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\FaqItem;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -23,9 +22,9 @@ class FaqItemCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new("question"),
-            TextareaField::new("answer", "Réponse"),
-            IntegerField::new("position")->setRequired(false),
+            TextField::new('question'),
+            TextareaField::new('answer', 'Réponse'),
+            IntegerField::new('position')->setRequired(false),
         ];
     }
 }

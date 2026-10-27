@@ -23,7 +23,6 @@ class FormulasHeader
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-
     public function getId(): ?int
     {
         return $this->id;

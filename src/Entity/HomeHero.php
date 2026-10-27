@@ -29,7 +29,6 @@ class HomeHero
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $secondaryButtonLabel = null;
 
-
     public function getId(): ?int
     {
         return $this->id;

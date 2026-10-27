@@ -19,17 +19,17 @@ class FaqCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("FAQ")
-            ->setEntityLabelInPlural("FAQ");
+            ->setEntityLabelInSingular('FAQ')
+            ->setEntityLabelInPlural('FAQ');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("subtitle", "Sous-titre (au-dessus du titre)")->setRequired(false),
-            TextField::new("title", "Titre")->setRequired(false),
-            CollectionField::new("items", "Questions")
+            IdField::new('id')->hideOnForm(),
+            TextField::new('subtitle', 'Sous-titre (au-dessus du titre)')->setRequired(false),
+            TextField::new('title', 'Titre')->setRequired(false),
+            CollectionField::new('items', 'Questions')
                 ->useEntryCrudForm(FaqItemCrudController::class)
                 ->setEntryIsComplex()
                 ->allowAdd()

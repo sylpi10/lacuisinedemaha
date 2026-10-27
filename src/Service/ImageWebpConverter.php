@@ -32,7 +32,7 @@ final class ImageWebpConverter
         return function (UploadedFile $file, string $uploadDir, string $fileName) use ($width, $height): void {
             $this->convert(
                 $file->getPathname(),
-                rtrim($uploadDir, '/\\') . '/' . $fileName,
+                rtrim($uploadDir, '/\\').'/'.$fileName,
                 $width,
                 $height,
             );

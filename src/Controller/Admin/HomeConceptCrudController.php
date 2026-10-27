@@ -18,16 +18,16 @@ class HomeConceptCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Concept (accueil)")
-            ->setEntityLabelInPlural("Concept (accueil)");
+            ->setEntityLabelInSingular('Concept (accueil)')
+            ->setEntityLabelInPlural('Concept (accueil)');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("subtitle", "Sous-titre (au-dessus du titre)")->setRequired(false),
-            TextField::new("title", "Titre")->setRequired(false),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('subtitle', 'Sous-titre (au-dessus du titre)')->setRequired(false),
+            TextField::new('title', 'Titre')->setRequired(false),
         ];
     }
 }

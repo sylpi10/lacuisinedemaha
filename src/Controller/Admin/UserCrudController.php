@@ -18,7 +18,8 @@ class UserCrudController extends AbstractCrudController
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
-    ) {}
+    ) {
+    }
 
     public static function getEntityFqcn(): string
     {
@@ -28,8 +29,8 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Utilisateur")
-            ->setEntityLabelInPlural("Utilisateurs");
+            ->setEntityLabelInSingular('Utilisateur')
+            ->setEntityLabelInPlural('Utilisateurs');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -37,23 +38,23 @@ class UserCrudController extends AbstractCrudController
         return parent::configureActions($actions)->update(
             Crud::PAGE_INDEX,
             Action::NEW,
-            fn(Action $action) => $action->setLabel("Ajouter un utilisateur"),
+            fn (Action $action) => $action->setLabel('Ajouter un utilisateur'),
         );
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("username"),
-            ChoiceField::new("roles")
+            IdField::new('id')->hideOnForm(),
+            TextField::new('username'),
+            ChoiceField::new('roles')
                 ->setChoices([
-                    "Administrateur" => "ROLE_ADMIN",
-                    "Utilisateur" => "ROLE_USER",
+                    'Administrateur' => 'ROLE_ADMIN',
+                    'Utilisateur' => 'ROLE_USER',
                 ])
                 ->allowMultipleChoices()
                 ->renderExpanded(),
-            TextField::new("plainPassword")
+            TextField::new('plainPassword')
                 ->setFormType(PasswordType::class)
                 ->setRequired(Crud::PAGE_NEW === $pageName)
                 // ->setHelp(Crud::PAGE_EDIT === $pageName ? 'Laisser vide pour conserver le mot de passe actuel.' : null)

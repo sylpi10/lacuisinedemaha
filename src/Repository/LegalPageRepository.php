@@ -18,6 +18,6 @@ class LegalPageRepository extends ServiceEntityRepository
 
     public function findOneBySlug(string $slug): ?LegalPage
     {
-        return $this->findOneBy(["slug" => $slug]);
+        return $this->findOneBy(['slug' => $slug]);
     }
 }

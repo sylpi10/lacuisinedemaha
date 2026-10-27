@@ -4,8 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Presentation;
 use App\Service\ImageWebpConverter;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -18,7 +16,8 @@ class PresentationCrudController extends AbstractCrudController
 {
     public function __construct(
         private readonly ImageWebpConverter $webpConverter,
-    ) {}
+    ) {
+    }
 
     public static function getEntityFqcn(): string
     {
@@ -28,17 +27,17 @@ class PresentationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setEntityLabelInSingular("Présentation")
-            ->setEntityLabelInPlural("Présentation");
+            ->setEntityLabelInSingular('Présentation')
+            ->setEntityLabelInPlural('Présentation');
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new("id")->hideOnForm(),
-            TextField::new("title")->setRequired(false),
-            TextField::new("subtitle")->setRequired(false),
-            TextareaField::new("description"),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('title')->setRequired(false),
+            TextField::new('subtitle')->setRequired(false),
+            TextareaField::new('description'),
             ImageField::new('image')
                 ->setBasePath('/uploads/presentation')
                 ->setUploadDir('public/uploads/presentation')

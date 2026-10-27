@@ -14,14 +14,15 @@ use Symfony\Component\Notifier\TexterInterface;
 
 final class ContactMailer
 {
-    private const ADDRESS = "contact@lacuisinedemaha31.fr";
+    private const ADDRESS = 'contact@lacuisinedemaha31.fr';
 
     public function __construct(
         private readonly MailerInterface $mailer,
         private readonly TexterInterface $texter,
         private readonly LoggerInterface $logger,
-        #[Autowire(env: "NTFY_TOPIC")] private readonly string $ntfyTopic,
-    ) {}
+        #[Autowire(env: 'NTFY_TOPIC')] private readonly string $ntfyTopic,
+    ) {
+    }
 
     /**
      * Le message doit déjà être enregistré en base : un échec d'envoi ne bloque
@@ -33,7 +34,7 @@ final class ContactMailer
             ->from(self::ADDRESS)
             ->replyTo($contact->getSenderEmail())
             ->to(self::ADDRESS)
-            ->subject("Nouveau message depuis La Cuisine de Maha")
+            ->subject('Nouveau message depuis La Cuisine de Maha')
             ->text($this->buildEmailBody($contact));
 
         try {
@@ -53,12 +54,12 @@ final class ContactMailer
      */
     private function alertFailure(Contact $contact, \Throwable $exception): void
     {
-        if ($this->ntfyTopic === "") {
+        if ('' === $this->ntfyTopic) {
             return;
         }
 
         $message = new PushMessage(
-            "La Cuisine de Maha : mail de contact non envoyé",
+            'La Cuisine de Maha : mail de contact non envoyé',
             \sprintf(
                 "Message n°%d enregistré mais pas envoyé (consultable dans l'admin).\n%s",
                 $contact->getId(),
@@ -66,14 +67,14 @@ final class ContactMailer
             ),
             new NtfyOptions()
                 ->setPriority(NtfyOptions::PRIORITY_HIGH)
-                ->addTag("warning"),
+                ->addTag('warning'),
         );
 
         try {
             $this->texter->send($message);
         } catch (\Throwable $alertError) {
-            $this->logger->error("Alerte ntfy impossible", [
-                "exception" => $alertError,
+            $this->logger->error('Alerte ntfy impossible', [
+                'exception' => $alertError,
             ]);
         }
     }
@@ -83,15 +84,15 @@ final class ContactMailer
         $lines = [
             "Nom : {$contact->getSenderName()}",
             "E-mail : {$contact->getSenderEmail()}",
-            "Téléphone : " . ($contact->getSenderPhone() ?? "non renseigné"),
-            "Formule souhaitée : " .
-            ($contact->getWishedFormula()?->getTitle() ?? "ne sait pas encore"),
-            "Date envisagée : " .
-            ($contact->getSenderDate()?->format("d/m/Y") ?? "non renseignée"),
-            "Nombre de convives : " .
-            ($contact->getSenderWishedNumber() ?? "non renseigné"),
-            "",
-            "Message :",
+            'Téléphone : '.($contact->getSenderPhone() ?? 'non renseigné'),
+            'Formule souhaitée : '.
+            ($contact->getWishedFormula()?->getTitle() ?? 'ne sait pas encore'),
+            'Date envisagée : '.
+            ($contact->getSenderDate()?->format('d/m/Y') ?? 'non renseignée'),
+            'Nombre de convives : '.
+            ($contact->getSenderWishedNumber() ?? 'non renseigné'),
+            '',
+            'Message :',
             $contact->getSenderMessage(),
         ];
 
