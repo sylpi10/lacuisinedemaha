@@ -1,0 +1,48 @@
+name: CI
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    back:
+        runs-on: ubuntu-latest
+
+        # base MariaDB jetable, démarrée à côté du job le temps des tests
+        # (même version qu'en local pour que le SQL se comporte pareil)
+        services:
+            database:
+                image: mariadb:11.8
+                env:
+                    MARIADB_ROOT_PASSWORD: root
+                ports:
+                    - 3306:3306
+                # attend que MariaDB accepte les connexions avant de lancer les étapes
+                options: >-
+                    --health-cmd="healthcheck.sh --connect --innodb_initialized"
+                    --health-interval=5s
+                    --health-timeout=5s
+                    --health-retries=10
+
+        # remplace le .env.test.local, qui n'est pas dans git ; en env "test",
+        # Doctrine ajoute le suffixe "_test" au nom de la base → cuisinemaha_test
+        env:
+            DATABASE_URL: "mysql://root:root@127.0.0.1:3306/cuisinemaha?serverVersion=11.8.8-MariaDB&charset=utf8mb4"
+
+        steps:
+            - uses: actions/checkout@v5
+
+            # PHP 8.4 : la version minimale de composer.json (config.platform.php)
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.4"
+                  coverage: none
+
+            - run: composer install --no-interaction --no-progress
+            - run: vendor/bin/php-cs-fixer fix --dry-run --diff
+
+            # crée la base vide puis les tables, comme en prod
+            - run: php bin/console doctrine:database:create --env=test
+            - run: php bin/console doctrine:migrations:migrate --env=test --no-interaction
+
+            - run: php bin/phpunit
