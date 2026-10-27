@@ -1,4 +1,4 @@
-.PHONY: deploy
+.PHONY: deploy deploy-test backup
 
 ifneq (,$(wildcard .env.deploy))
 include .env.deploy
@@ -18,9 +18,16 @@ RSYNC_EXCLUDES = \
 	--exclude docke/* \
 	--exclude tests/ \
 	--exclude public/bundles/ \
-    --exclude public/assets/
+	--exclude public/assets/ \
+	--exclude scripts/
 
-deploy:
+# Dump gzippé de la base de prod dans ~/backups/cuisinemaha/ sur le serveur (15 derniers conservés).
+# Le script est envoyé par ssh : rien à installer côté serveur.
+backup:
+	ssh $(SERVER_USER)@$(SERVER_HOST) 'bash -s' -- "$(SERVER_PATH)" 15 cuisinemaha < scripts/db-backup.sh
+
+# Le backup passe avant tout : s'il échoue, le déploiement s'arrête.
+deploy: backup
 	rsync -av --itemize-changes ./ $(SERVER_USER)@$(SERVER_HOST):~/$(SERVER_PATH) \
 		$(RSYNC_EXCLUDES)
 
@@ -28,6 +35,7 @@ deploy:
 		cd $(SERVER_PATH) && \
 		composer install --no-dev --optimize-autoloader --classmap-authoritative && \
 		composer dump-env prod && \
+		php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration --env=prod && \
 		php bin/console importmap:install && \
 		php bin/console asset-map:compile && \
 		php bin/console cache:clear --env=prod \
