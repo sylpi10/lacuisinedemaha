@@ -43,6 +43,8 @@ class ContactType extends AbstractType
                 'label' => 'Date envisagée',
                 'widget' => 'single_text',
                 'required' => false,
+                // grise les jours passés dans le calendrier ; la contrainte de l'entité reste la vraie vérification
+                'attr' => ['min' => new \DateTimeImmutable('today')->format('Y-m-d')],
             ])
             ->add('senderWishedNumber', IntegerType::class, [
                 'label' => 'Nombre de convives',

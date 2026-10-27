@@ -1,5 +1,5 @@
-
 {% extends 'base.html.twig' %}
+{% form_theme contactForm 'form/contact_theme.html.twig' %}
 {% block title %}Contact · La cuisine de Maha{% endblock %}
 {% block description %}Contactez Maha, cheffe à domicile à Pins-Justaret (31), pour réserver un brunch, un repas ou un petit événement.{% endblock %}
 {% block body %}
@@ -23,36 +23,40 @@
       </dl>
     </div>
 
-    {% for message in app.flashes('success') %}
-      <p class="form-note" style="font-weight:600;">{{ message }}</p>
-    {% endfor %}
+    <turbo-frame id="contact-form">
+        {{ form_start(contactForm, {'attr': {'class': 'contact-form'}}) }}
 
-    {{ form_start(contactForm, {'attr': {'class': 'contact-form'}}) }}
-      {# Piège à robots : invisible et inutilisable au clavier pour un humain. #}
-      <input type="text" name="website" id="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
-      <input type="hidden" name="contact_token" value="{{ contact_token }}">
-      <div class="form-row">
-        <div>{{ form_row(contactForm.senderName) }}</div>
-        <div>{{ form_row(contactForm.senderEmail) }}</div>
-      </div>
-      <div class="form-row">
-        <div>{{ form_row(contactForm.senderPhone) }}</div>
-        <div>{{ form_row(contactForm.wishedFormula) }}</div>
-      </div>
-      <div class="form-row">
-        <div>{{ form_row(contactForm.senderDate) }}</div>
-        <div>{{ form_row(contactForm.senderWishedNumber) }}</div>
-      </div>
-      <div>{{ form_row(contactForm.senderMessage) }}</div>
-      <p class="form-note">
-        <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400;">
-          {{ form_widget(contactForm.agreeTerms, {'attr': {'style': 'width:auto;'}}) }}
-          {{ contactForm.agreeTerms.vars.label }}
-        </label>
-        {{ form_errors(contactForm.agreeTerms) }}
-      </p>
-      <button class="btn btn-primary" type="submit">Envoyer la demande</button>
-    {{ form_end(contactForm) }}
+          {# Piège à robots : invisible et inutilisable au clavier pour un humain. #}
+          <input type="text" name="website" id="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+          <input type="hidden" name="contact_token" value="{{ contact_token }}">
+          <div class="form-row">
+            <div>{{ form_row(contactForm.senderName) }}</div>
+            <div>{{ form_row(contactForm.senderEmail) }}</div>
+          </div>
+          <div class="form-row">
+            <div>{{ form_row(contactForm.senderPhone) }}</div>
+            <div>{{ form_row(contactForm.wishedFormula) }}</div>
+          </div>
+          <div class="form-row">
+            <div>{{ form_row(contactForm.senderDate) }}</div>
+            <div>{{ form_row(contactForm.senderWishedNumber) }}</div>
+          </div>
+          <div>{{ form_row(contactForm.senderMessage) }}</div>
+          <p class="form-note">
+            <label style="display:flex; align-items:flex-start; gap:8px; font-weight:400;">
+              {{ form_widget(contactForm.agreeTerms, {'attr': {'style': 'width:auto;'}}) }}
+              {{ contactForm.agreeTerms.vars.label }}
+            </label>
+            {{ form_errors(contactForm.agreeTerms) }}
+          </p>
+          <button class="btn btn-primary" type="submit">Envoyer la demande</button>
+        {{ form_end(contactForm) }}
+
+        {% for message in app.flashes('success') %}
+          <p class="form-note" style="font-weight:600;">{{ message }}</p>
+        {% endfor %}
+
+    </turbo-frame>
   </div>
 </section>
 {% endblock %}

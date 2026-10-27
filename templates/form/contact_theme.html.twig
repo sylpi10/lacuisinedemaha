@@ -1,0 +1,18 @@
+{# Thème du formulaire de contact : l'erreur s'affiche sous le champ, sans liste à puces.
+   Les id "<champ>_error<n>" sont ceux du thème par défaut, que le champ référence
+   dans aria-describedby pour que les lecteurs d'écran annoncent l'erreur. #}
+
+{%- block form_row_render -%}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_errors(form) -}}
+        {{- form_help(form) -}}
+    </div>
+{%- endblock form_row_render -%}
+
+{%- block form_errors -%}
+    {%- for error in errors -%}
+        <p class="field-error" id="{{ id ~ '_error' ~ loop.index }}">{{ error.message }}</p>
+    {%- endfor -%}
+{%- endblock form_errors -%}

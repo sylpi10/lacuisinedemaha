@@ -54,7 +54,7 @@ final class ContactController extends AbstractController
             return $this->redirectToRoute('site_contact');
         }
 
-        [$contactToken, $contactIssuedAt] = $this->issueAntiSpamGuards($request);
+        [$contactToken, $contactIssuedAt] = $this->issueAntiSpamGuards($request, keepIssuedAt: $form->isSubmitted());
 
         return $this->render('contact.html.twig', [
             'page' => $contactPageRepository->getContent(),
@@ -65,17 +65,26 @@ final class ContactController extends AbstractController
     }
 
     /**
-     * Émet un nouveau couple jeton/horodatage pour le formulaire qui va être
-     * affiché, et le garde en session pour pouvoir le vérifier à la soumission.
+     * Émet un nouveau jeton pour le formulaire qui va être affiché, et le garde
+     * en session pour pouvoir le vérifier à la soumission.
+     *
+     * Après un envoi invalide, l'horodatage du premier affichage est conservé :
+     * sinon le délai minimum repartirait de zéro et un visiteur qui corrige
+     * vite un champ verrait son message rejeté comme un robot.
      *
      * @return array{0: string, 1: int}
      */
-    private function issueAntiSpamGuards(Request $request): array
+    private function issueAntiSpamGuards(Request $request, bool $keepIssuedAt = false): array
     {
-        $token = bin2hex(random_bytes(16));
-        $issuedAt = time();
-
         $session = $request->getSession();
+        $token = bin2hex(random_bytes(16));
+
+        $issuedAt = (int) $session->get(self::SESSION_ISSUED_AT_KEY, 0);
+        // un horodatage expiré n'est pas conservé : le visiteur resterait bloqué
+        if (!$keepIssuedAt || $issuedAt <= 0 || time() - $issuedAt > self::MAX_FORM_AGE_SECONDS) {
+            $issuedAt = time();
+        }
+
         $session->set(self::SESSION_TOKEN_KEY, $token);
         $session->set(self::SESSION_ISSUED_AT_KEY, $issuedAt);
 

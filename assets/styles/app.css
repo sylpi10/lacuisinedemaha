@@ -687,11 +687,9 @@ form.contact-form {
 }
 .contact-grid {
     position: relative;
-    & > p.form-note {
-        position: absolute;
+    #contact-form > p.form-note {
         color: #232b23;
-        top: auto;
-        bottom: -12px;
+        margin-top: 14px;
         background-color: #a7aaa7;
         border: solid 1px #232b23;
         padding: 8px 12px;
@@ -741,6 +739,18 @@ textarea {
 .form-note {
     font-size: 0.82rem;
     color: var(--pine);
+}
+
+/* erreurs de validation renvoyées par le serveur (thème form/contact_theme) */
+[aria-invalid="true"] {
+    border-color: var(--paprika);
+}
+
+.field-error {
+    margin-top: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--paprika);
 }
 
 /* ---------- Texte riche (pages légales, contenu saisi en BO) ---------- */

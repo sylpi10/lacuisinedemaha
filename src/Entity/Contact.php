@@ -17,7 +17,7 @@ class Contact
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Merci de renseigner votre nom.')]
-    #[Assert\Length(min: 2, max: 70)]
+    #[Assert\Length(min: 2, max: 70, minMessage: 'Merci d’indiquer au moins 2 caractères.')]
     private ?string $senderName = null;
 
     #[ORM\Column(length: 255)]
@@ -36,6 +36,7 @@ class Contact
     private ?int $senderWishedNumber = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\GreaterThanOrEqual('today', message: 'Merci de choisir une date à venir.')]
     private ?\DateTime $senderDate = null;
 
     #[ORM\Column(type: Types::TEXT)]
